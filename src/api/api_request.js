@@ -33,3 +33,12 @@ export const imageFlowerUpload = (id, data) =>
 
 export const getDecors = () => axios.get(`${BASE_PATH_API}decors`);
 export const getFlowers = () => axios.get(`${BASE_PATH_API}flowers`);
+export const updateDecor = (id, data) =>
+  axios.put(`${BASE_PATH_API}decors/${id}`, data);
+export const updateFlower = (id, data) =>
+  axios.put(`${BASE_PATH_API}flowers/${id}`, data);
+export const getFlower = (id) => axios.get(`${BASE_PATH_API}flowers/${id}`);
+export const getDecor = (id) => axios.get(`${BASE_PATH_API}decors/${id}`);
+export const deleteDecor = (id) => axios.delete(`${BASE_PATH_API}decors/${id}`);
+export const deleteFlower = (id) =>
+  axios.delete(`${BASE_PATH_API}flowers/${id}`);

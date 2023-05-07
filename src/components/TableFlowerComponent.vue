@@ -33,7 +33,10 @@
           </button>
         </td>
         <td>
-          <button style="background-color: transparent; border: none">
+          <button
+            @click="deleteFlower(flower.id)"
+            style="background-color: transparent; border: none"
+          >
             <img
               src="../assets/images/delete-button.png"
               style="width: 40%"
@@ -46,6 +49,8 @@
   </table>
 </template>
 <script>
+import { deleteFlower } from "@/api/api_request";
+
 export default {
   name: "TableFlowerComponent",
   props: {
@@ -57,6 +62,11 @@ export default {
   methods: {
     getImagePath: function (imagePath) {
       return `http://localhost/storage/${imagePath}`;
+    },
+    deleteFlower: function (id) {
+      deleteFlower(id).then(() => {
+        location.reload();
+      });
     },
   },
 };

@@ -33,7 +33,10 @@
           </button>
         </td>
         <td>
-          <button style="background-color: transparent; border: none">
+          <button
+            @click="deleteDecor(decor.id)"
+            style="background-color: transparent; border: none"
+          >
             <img
               src="../assets/images/delete-button.png"
               style="width: 40%"
@@ -47,6 +50,8 @@
 </template>
 
 <script>
+import { deleteDecor } from "@/api/api_request";
+
 export default {
   name: "TableDecorComponent",
   props: {
@@ -58,6 +63,11 @@ export default {
   methods: {
     getImagePath: function (imagePath) {
       return `http://localhost/storage/${imagePath}`;
+    },
+    deleteDecor: function (id) {
+      deleteDecor(id).then(() => {
+        location.reload();
+      });
     },
   },
 };

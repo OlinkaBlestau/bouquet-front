@@ -112,9 +112,35 @@ export default {
           let formData = new FormData();
           formData.append("image", this.img_path);
           imageDecorUpload(response.data.decor.id, formData);
+          this.$swal({
+            icon: "success",
+            color: "#000",
+            timer: 4000,
+            timerProgressBar: true,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+          // window.location.href = "/view-flowers";
         })
-        .catch((er) => {
-          console.log(er);
+        .catch(() => {
+          this.$swal({
+            icon: "error",
+            color: "#000",
+            title: this.$t("something_went_wrong.title"),
+            text: this.$t("something_went_wrong.text"),
+            timer: 4000,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+            timerProgressBar: true,
+          });
         });
     },
   },
