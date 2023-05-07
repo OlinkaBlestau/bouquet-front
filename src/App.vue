@@ -13,6 +13,8 @@ export default {
   components: { Navbar },
   beforeMount() {
     this.setAccessTokenToVuex();
+    this.setRoleToVuex();
+    this.setUserIdToVuex();
   },
   methods: {
     setAccessTokenToVuex() {
@@ -22,8 +24,24 @@ export default {
         this.setAccessToken(accessToken);
       }
     },
+    setRoleToVuex() {
+      let role = localStorage.getItem("role");
+
+      if (role !== null) {
+        this.setRole(role);
+      }
+    },
+    setUserIdToVuex() {
+      let userid = localStorage.getItem("userId");
+
+      if (userid !== null) {
+        this.setUserId(userid);
+      }
+    },
     ...mapMutations([
-      "setAccessToken", // map `this.increment()` to `this.$store.commit('increment')`
+      "setAccessToken",
+      "setRole",
+      "setUserId", // map `this.increment()` to `this.$store.commit('increment')`
     ]),
   },
 };
@@ -35,7 +53,9 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-
+p {
+  font-weight: 400;
+}
 html,
 body {
   margin: 0;

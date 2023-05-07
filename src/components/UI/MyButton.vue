@@ -20,4 +20,8 @@ export default {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+.btn:hover {
+  background-color: #fff;
+  color: #3a0000;
+}
 </style>

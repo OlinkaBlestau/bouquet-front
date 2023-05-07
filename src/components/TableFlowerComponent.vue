@@ -1,0 +1,91 @@
+<template>
+  <table class="table table-bordered border-black">
+    <thead style="background-color: #ffdede">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Color</th>
+        <th scope="col">Price</th>
+        <th scope="col">Amount</th>
+        <th scope="col">IMG</th>
+        <th scope="col">EDIT</th>
+        <th scope="col">DELETE</th>
+      </tr>
+    </thead>
+    <tbody style="background-color: #ffffff">
+      <tr
+        v-for="(flower, index) in this.flowers"
+        :key="index"
+        style="border-color: #3a0000"
+      >
+        <td>{{ flower.name }}</td>
+        <td>{{ flower.color }}</td>
+        <td>{{ flower.price }}</td>
+        <td>{{ flower.storage_flowers_amount }}</td>
+        <td>
+          <img :src="getImagePath(flower.img_path)" class="img-fluid" alt="" />
+        </td>
+        <td>
+          <button
+            @click="$router.push(`/edit-flower/${flower.id}`)"
+            style="background-color: transparent; border: none"
+          >
+            <img src="../assets/images/edit.png" style="width: 40%" alt="" />
+          </button>
+        </td>
+        <td>
+          <button style="background-color: transparent; border: none">
+            <img
+              src="../assets/images/delete-button.png"
+              style="width: 40%"
+              alt=""
+            />
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+<script>
+export default {
+  name: "TableFlowerComponent",
+  props: {
+    flowers: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    getImagePath: function (imagePath) {
+      return `http://localhost/storage/${imagePath}`;
+    },
+  },
+};
+</script>
+<style scoped>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Klee One", cursive;
+  letter-spacing: 2px;
+  font-size: 1.3vw;
+  color: #3a0000;
+  border: 1px solid #000; /* Change the border color to black */
+}
+
+th {
+  text-align: center;
+  border: 1px solid #3a0000;
+  padding: 5px;
+}
+
+td {
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #000;
+}
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+</style>

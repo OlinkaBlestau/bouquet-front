@@ -65,7 +65,11 @@ export default {
       })
         .then((response) => {
           this.setAccessToken(response.data.token);
+          this.setRole(response.data.role);
+          this.setUserId(response.data.userId);
           localStorage.setItem("accessToken", response.data.token);
+          localStorage.setItem("role", response.data.role);
+          localStorage.setItem("userId", response.data.userId);
           this.$swal({
             icon: "success",
             color: "#000",
@@ -78,7 +82,7 @@ export default {
               popup: "animate__animated animate__fadeOutUp",
             },
           });
-          this.$router.push("/login");
+          this.$router.push(`/profile/${response.data.userId}`);
         })
         .catch(() => {
           this.$swal({
@@ -98,7 +102,9 @@ export default {
         });
     },
     ...mapMutations([
-      "setAccessToken", // map `this.increment()` to `this.$store.commit('increment')`
+      "setAccessToken",
+      "setRole",
+      "setUserId", // map `this.increment()` to `this.$store.commit('increment')`
     ]),
   },
 };

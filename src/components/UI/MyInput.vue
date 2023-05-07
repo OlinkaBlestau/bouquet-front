@@ -21,11 +21,10 @@ export default {
   width: 100%;
   border: 1px solid white;
   background-color: #fff;
-  padding: 30px 15px;
+  padding: 3px 20px;
   margin-top: 10px;
   font-size: 25px;
   color: black;
-  font-weight: 700;
   letter-spacing: 4px;
 }
 </style>
