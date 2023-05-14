@@ -7,43 +7,9 @@
 
 <script>
 import Navbar from "@/components/NavbarPage.vue";
-import { mapMutations } from "vuex";
 
 export default {
   components: { Navbar },
-  beforeMount() {
-    this.setAccessTokenToVuex();
-    this.setRoleToVuex();
-    this.setUserIdToVuex();
-  },
-  methods: {
-    setAccessTokenToVuex() {
-      let accessToken = localStorage.getItem("accessToken");
-
-      if (accessToken !== null) {
-        this.setAccessToken(accessToken);
-      }
-    },
-    setRoleToVuex() {
-      let role = localStorage.getItem("role");
-
-      if (role !== null) {
-        this.setRole(role);
-      }
-    },
-    setUserIdToVuex() {
-      let userid = localStorage.getItem("userId");
-
-      if (userid !== null) {
-        this.setUserId(userid);
-      }
-    },
-    ...mapMutations([
-      "setAccessToken",
-      "setRole",
-      "setUserId", // map `this.increment()` to `this.$store.commit('increment')`
-    ]),
-  },
 };
 </script>
 

@@ -9,8 +9,9 @@ import moment from "moment";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "popper.js";
-import storage from "@/storage/main";
 import { DDR } from "yoyoo-ddr";
+require("./storage/subscriber");
+import storage from "@/storage/main";
 
 const app = createApp(App);
 app.use(VueSweetalert2);

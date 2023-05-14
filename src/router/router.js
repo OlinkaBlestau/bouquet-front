@@ -14,6 +14,7 @@ import EditFlowersPage from "@/pages/Admin/EditFlowersPage.vue";
 import ViewDecorPage from "@/pages/Admin/ViewDecorPage.vue";
 import ViewFlowersPage from "@/pages/Admin/ViewFlowersPage.vue";
 import CreateBouquet from "@/pages/User/CreateBouquet.vue";
+import ContactsPage from "@/pages/User/ContactsPage.vue";
 
 const routes = [
   {
@@ -82,6 +83,21 @@ const routes = [
   {
     path: "/create-bouquet",
     component: CreateBouquet,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "admin"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+  {
+    path: "/contact",
+    component: ContactsPage,
     beforeEnter: (to, from, next) => {
       if (
         store.getters["isAuth"] === false ||

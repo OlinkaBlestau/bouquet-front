@@ -1,12 +1,12 @@
 <template>
   <div class="cont m-auto">
-    <h1
-      class="text-center"
-      style="position: relative; top: 10px; margin-bottom: 60px"
-    >
-      View profile
-    </h1>
     <div class="person-info m-auto" style="margin-top: 49px">
+      <h1
+        class="text-center"
+        style="position: relative; top: 10px; margin-bottom: 60px"
+      >
+        View profile
+      </h1>
       <div class="info-block d-flex justify-content-between">
         <p>Fist name</p>
         <p>{{ user.first_name }}</p>
@@ -27,13 +27,13 @@
         <p>Phone</p>
         <p>{{ user.phone }}</p>
       </div>
+      <button
+        class="btn d-block mx-auto"
+        @click="$router.push(`/profile-update/${user.id}`)"
+      >
+        Edit profile
+      </button>
     </div>
-    <button
-      class="btn d-block mx-auto"
-      @click="$router.push(`/profile-update/${user.id}`)"
-    >
-      Edit profile
-    </button>
   </div>
 </template>
 
@@ -64,29 +64,29 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  color: #3a0000;
-  letter-spacing: 3px;
-  font-size: 2.7vw;
-  font-weight: 700;
-  font-family: "Marmelad", sans-serif;
+.person-info {
+  border: 2px solid #3a0000;
+  width: 60%;
+  padding: 20px;
+  border-radius: 20px;
+  z-index: 2;
+  position: relative;
+  margin-bottom: -100px;
 }
 .cont {
-  border: 1px solid #3a0000;
   position: relative;
   top: 50px;
-  border-radius: 30px;
-  width: 60%;
-  padding: 30px;
+  width: 90%;
+  overflow-x: hidden;
 }
 .info-block {
   border: 1px solid #ffdede;
   margin-bottom: 20px;
-  background-color: #ffdede;
   font-size: 1.8vw;
   padding: 10px 20px 2px 20px;
   border-radius: 30px;
   color: black;
+  background-color: #ffdede;
 }
 .btn {
   background-color: #3a0000;

@@ -68,8 +68,11 @@
           <li class="nav-item" v-if="isAuth && getRole == 'admin'">
             <a class="nav-link" :href="`/shop-info/${1}`">Shop</a>
           </li>
+          <li class="nav-item" v-if="isAuth && getRole == 'user'">
+            <a class="nav-link" :href="`/contact`">Contacts</a>
+          </li>
           <li class="nav-item" v-if="isAuth">
-            <a class="nav-link" :href="`/view-flowers`">Logout</a>
+            <a class="nav-link" @click="exit" :href="`/view-flowers`">Logout</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -117,6 +120,14 @@ export default {
     ...mapGetters(["getUserId"]),
     ...mapGetters(["getRole"]),
     ...mapGetters(["isAuth"]),
+  },
+  methods: {
+    exit() {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("role");
+      location.replace("/login");
+    },
   },
 };
 </script>

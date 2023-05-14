@@ -2,9 +2,12 @@ import { createStore } from "vuex";
 
 const store = createStore({
   state: {
-    accessToken: null,
-    role: null,
-    userId: null,
+    accessToken:
+      localStorage.getItem("accessToken") == "null"
+        ? null
+        : localStorage.getItem("accessToken"),
+    role: localStorage.getItem("role"),
+    userId: localStorage.getItem("userId"),
   },
   getters: {
     isAuth(state) {
