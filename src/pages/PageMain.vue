@@ -15,7 +15,9 @@
         <div class="section-info">
           <h1 class="section-title">Create your</h1>
           <h2 class="section-title">dream</h2>
-          <button class="section-button">Enter to account</button>
+          <button @click="$router.push('/login')" class="section-button">
+            Enter to account
+          </button>
         </div>
       </div>
     </section>

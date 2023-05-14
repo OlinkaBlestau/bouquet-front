@@ -10,9 +10,12 @@ import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "popper.js";
 import storage from "@/storage/main";
+import { DDR } from "yoyoo-ddr";
 
 const app = createApp(App);
 app.use(VueSweetalert2);
+app.component("DDR", DDR);
+
 app.config.globalProperties.$moment = moment;
 components.forEach((component) => {
   app.component(component.name, component);

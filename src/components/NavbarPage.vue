@@ -15,7 +15,7 @@
       </button>
       <div class="collapse mr-5 navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item" v-if="isAuth && getRole == 'user'">
+          <li class="nav-item" v-if="!isAuth">
             <a class="nav-link" href="/">Main</a>
           </li>
           <li v-if="!isAuth && !isLoginPage" class="nav-item">
@@ -23,6 +23,35 @@
           </li>
           <li class="nav-item" v-if="!isRegisterPage && !isAuth">
             <a class="nav-link" href="/register">Sign up</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              v-if="isAuth && getRole == 'user'"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Bouquet
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item"
+                  @click="$router.push('/create-bouquet')"
+                  style="font-size: 22px"
+                  href="#"
+                  >Create</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a class="dropdown-item" style="font-size: 22px" href="#"
+                  >View all my bouquets</a
+                >
+              </li>
+            </ul>
           </li>
           <li v-if="isAuth && getRole == 'user'" class="nav-item">
             <a class="nav-link" :href="`/profile/${getUserId}`">Profile</a>
