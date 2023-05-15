@@ -115,17 +115,18 @@ form {
   background-color: #ffdede;
   padding: 64px;
   position: relative;
-  top: 100px;
+  top: 80px;
   width: 40%;
   border-radius: 60px;
 }
 form h2 {
   text-align: center;
   color: #3a0000;
+  font-family: "Marmelad", sans-serif;
+
   margin-bottom: 60px;
   font-size: 43px;
   letter-spacing: 5px;
-  font-weight: bold;
 }
 
 .form-group {

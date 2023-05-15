@@ -13,8 +13,8 @@
           alt="Logo"
         />
         <div class="section-info">
-          <h1 class="section-title">Create your</h1>
-          <h2 class="section-title">dream</h2>
+          <h1 class="section-title" style="font-size: 115px">Create your</h1>
+          <h2 class="section-title" style="font-size: 115px">dream</h2>
           <button @click="$router.push('/login')" class="section-button">
             Enter to account
           </button>
@@ -225,8 +225,7 @@ export default {
   color: #e1225d;
   font-weight: 700;
   font-family: "Marmelad", sans-serif;
-  font-size: 50px;
-  margin-right: 30px;
+  margin-right: -20px;
 }
 .section-info h1 {
   right: 250px;

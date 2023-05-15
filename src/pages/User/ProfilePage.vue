@@ -64,12 +64,16 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  color: #3a0000;
+  letter-spacing: 3px;
+  font-family: "Marmelad", sans-serif;
+}
 .person-info {
   border: 2px solid #3a0000;
-  width: 60%;
+  width: 55%;
   padding: 20px;
   border-radius: 20px;
-  z-index: 2;
   position: relative;
   margin-bottom: -100px;
 }
@@ -87,6 +91,7 @@ export default {
   border-radius: 30px;
   color: black;
   background-color: #ffdede;
+  box-shadow: 0 5px 10px -2px gray;
 }
 .btn {
   background-color: #3a0000;

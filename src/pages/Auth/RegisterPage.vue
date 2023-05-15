@@ -85,7 +85,7 @@
       </MyButton>
     </div>
     <div class="d-flex justify-content-center">
-      <a href="/register">I have already an account</a>
+      <a href="/login">I have already an account</a>
     </div>
   </form>
 </template>
@@ -161,19 +161,18 @@ export default {
 form {
   background-color: #ffdede;
   padding: 64px;
-  margin-bottom: 30px;
   position: relative;
-  top: 100px;
+  top: 80px;
   width: 40%;
   border-radius: 60px;
 }
 form h2 {
   text-align: center;
   color: #3a0000;
+  font-family: "Marmelad", sans-serif;
   margin-bottom: 60px;
   font-size: 43px;
   letter-spacing: 5px;
-  font-weight: bold;
 }
 
 .form-group {

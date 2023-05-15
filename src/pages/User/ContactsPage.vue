@@ -86,6 +86,8 @@ export default {
   font-size: 1.2vw;
   background-color: #ffdede;
   padding: 40px;
+  box-shadow: 0 5px 10px -2px gray;
+
   top: 88px;
   left: 280px;
   border-radius: 25px;
@@ -106,6 +108,8 @@ export default {
   font-size: 1.2vw;
   background-color: #ffdede;
   padding: 40px;
+  box-shadow: 0 5px 10px -2px gray;
+
   border-radius: 25px;
   z-index: 2;
 }

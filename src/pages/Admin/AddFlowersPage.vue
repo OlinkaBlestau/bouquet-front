@@ -1,5 +1,5 @@
 <template>
-  <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
+  <form class="container mx-auto" @submit.prevent>
     <h2 class="mx-auto">Add flower</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
@@ -150,19 +150,19 @@ export default {
 form {
   background-color: #ffdede;
   padding: 64px;
-  margin-bottom: 30px;
   position: relative;
-  top: 100px;
+  top: 80px;
   width: 40%;
   border-radius: 60px;
 }
+
 form h2 {
   text-align: center;
   color: #3a0000;
   margin-bottom: 60px;
   font-size: 43px;
+  font-family: "Marmelad", sans-serif;
   letter-spacing: 5px;
-  font-weight: bold;
 }
 
 .form-group {

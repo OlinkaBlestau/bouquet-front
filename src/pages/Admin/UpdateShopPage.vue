@@ -1,6 +1,6 @@
 <template>
   <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
-    <h2 class="mx-auto">Edit profile</h2>
+    <h2 class="mx-auto">Edit Shop</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
         <label for="">Email</label>
@@ -163,17 +163,17 @@ form {
   padding: 64px;
   margin-bottom: 30px;
   position: relative;
-  top: 100px;
+  top: 80px;
   width: 40%;
   border-radius: 60px;
 }
 form h2 {
   text-align: center;
   color: #3a0000;
+  font-family: "Marmelad", sans-serif;
   margin-bottom: 60px;
   font-size: 43px;
   letter-spacing: 5px;
-  font-weight: bold;
 }
 
 .form-group {
