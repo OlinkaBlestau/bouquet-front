@@ -96,8 +96,8 @@ td {
   border: 1px solid #000;
 }
 img {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 </style>

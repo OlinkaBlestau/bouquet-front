@@ -68,9 +68,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <MyButton @click="submit" type="submit" class="btn">
-        Save changes
-      </MyButton>
+      <MyButton @click="submit" type="submit" class="btn"> Add decor </MyButton>
     </div>
   </form>
 </template>
@@ -124,7 +122,7 @@ export default {
               popup: "animate__animated animate__fadeOutUp",
             },
           });
-          // window.location.href = "/view-flowers";
+          window.location.href = "/view-decors";
         })
         .catch(() => {
           this.$swal({

@@ -99,18 +99,104 @@
       </div>
     </section>
     <footer class="m-auto">
-      <h2 class="text-center mt-4" style="font-size: 1vw">
-        Здесь должен быть текст футера
-      </h2>
+      <div class="footer-cont d-flex justify-content-between">
+        <div class="address-info">
+          <h2 class="text-left" style="margin-top: 40px">
+            Email: {{ shop.email }}
+          </h2>
+          <h2 class="text-left" style="margin-top: 30px">
+            Address: {{ shop.address }}
+          </h2>
+          <h2 class="text-left" style="margin-top: 30px">
+            Phone: {{ shop.phone }}
+          </h2>
+        </div>
+        <div
+          class="row"
+          style="margin-right: 300px; margin-top: 35px; margin-bottom: 20px"
+        >
+          <div class="col-md-12">
+            <ul class="social-icons">
+              <li>
+                <a href="https://web.telegram.org/k/" target="_blank">
+                  <img src="../assets/images/telegram.png" alt="Facebook" />
+                  <span class="social-text">Telegram</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://uk-ua.facebook.com/" target="_blank">
+                  <img src="../assets/images/facebook.png" alt="Twitter" />
+                  <span class="social-text">Facebook</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2F"
+                  target="_blank"
+                >
+                  <img src="../assets/images/instagram.png" alt="Instagram" />
+                  <span class="social-text">Instagram</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </footer>
   </div>
 </template>
 <script>
+import { getShop } from "@/api/api_request";
+
 export default {
   name: "PageMain",
+  data() {
+    return {
+      shop: [],
+    };
+  },
+  beforeMount() {
+    getShop(1).then((response) => {
+      this.shop = response.data.shop;
+    });
+  },
 };
 </script>
 <style scoped>
+.address-info h2 {
+  font-family: "Klee One", cursive;
+  font-size: 1.6vw;
+  margin-left: 300px;
+}
+.social-icons {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons li {
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.social-icons img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.social-text {
+  font-size: 1.6vw;
+}
 #section2 {
   background-color: #fff;
   width: 80%;
@@ -139,7 +225,7 @@ export default {
 .info-section3-list h1,
 .info-section4-list h1 {
   color: #23a79e;
-  font-weight: 700;
+  font-family: "Marmelad", sans-serif;
   font-size: 5vw;
   margin-bottom: 50px;
 }
@@ -156,8 +242,8 @@ export default {
 }
 .info-section5-list h1 {
   color: #23a79e;
-  font-weight: 700;
   font-size: 5vw;
+  font-family: "Marmelad", sans-serif;
   margin-bottom: 50px;
 }
 .info-section5-list ul li {

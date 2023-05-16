@@ -69,7 +69,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <MyButton @click="submit" type="submit" class="btn">
-        Save changes
+        Add flower
       </MyButton>
     </div>
   </form>
@@ -123,7 +123,7 @@ export default {
               popup: "animate__animated animate__fadeOutUp",
             },
           });
-          // window.location.href = "/view-decors";
+          window.location.href = "/view-flowers";
         })
         .catch(() => {
           this.$swal({

@@ -156,7 +156,7 @@ form {
   padding: 64px;
   margin-bottom: 30px;
   position: relative;
-  top: 100px;
+  top: 80px;
   width: 40%;
   border-radius: 60px;
 }
@@ -166,7 +166,7 @@ form h2 {
   margin-bottom: 60px;
   font-size: 43px;
   letter-spacing: 5px;
-  font-weight: bold;
+  font-family: "Marmelad", sans-serif;
 }
 
 .form-group {
