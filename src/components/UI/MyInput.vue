@@ -23,8 +23,8 @@ export default {
   background-color: #fff;
   padding: 3px 20px;
   margin-top: 10px;
-  font-size: 25px;
+  font-size: 23px;
   color: black;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
 }
 </style>

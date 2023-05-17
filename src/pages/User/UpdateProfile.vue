@@ -80,7 +80,12 @@
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <MyButton @click="submit" type="submit" class="btn">
+      <MyButton
+        @click="submit"
+        type="submit"
+        class="btn"
+        style="margin-top: 20px"
+      >
         Save changes
       </MyButton>
     </div>
@@ -177,7 +182,7 @@ form h2 {
 }
 
 .form-group {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 a {
   color: #3a0000;
@@ -188,7 +193,7 @@ a {
 label {
   position: relative;
   top: 21px;
-  font-size: 30px;
+  font-size: 23px;
   color: #3a0000;
 }
 </style>

@@ -78,7 +78,7 @@ h1 {
 }
 .person-info {
   border: 2px solid #3a0000;
-  width: 55%;
+  width: 45%;
   padding: 20px;
   border-radius: 20px;
   position: relative;
@@ -93,7 +93,7 @@ h1 {
 .info-block {
   border: 1px solid #ffdede;
   margin-bottom: 20px;
-  font-size: 1.8vw;
+  font-size: 1.3vw;
   padding: 10px 20px 2px 20px;
   border-radius: 30px;
   color: black;
@@ -104,9 +104,10 @@ h1 {
 .btn {
   background-color: #3a0000;
   border: 1px solid #3a0000;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   color: white;
   width: 30%;
+  margin-top: 50px;
   border-radius: 10px;
 }
 .btn:hover {

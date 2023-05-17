@@ -170,7 +170,7 @@ form h2 {
 }
 
 .form-group {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 a {
   color: #3a0000;
@@ -181,7 +181,7 @@ a {
 label {
   position: relative;
   top: 21px;
-  font-size: 30px;
+  font-size: 23px;
   color: #3a0000;
 }
 </style>

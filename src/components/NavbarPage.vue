@@ -86,7 +86,7 @@
                   @click="$router.push(`/shop-info/${1}`)"
                   style="font-size: 22px"
                   href="#"
-                  >ShopInfo</a
+                  >Shop information</a
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
@@ -96,7 +96,7 @@
                   @click="$router.push(`/profile/${getUserId}`)"
                   style="font-size: 22px"
                   href="#"
-                  >ProfileInfo</a
+                  >Profile information</a
                 >
               </li>
             </ul>
@@ -198,20 +198,20 @@ nav {
   margin-left: auto;
   font-size: 2rem;
   color: #3a0000;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 
 .navbar-nav .nav-item a {
   color: #3a0000;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 .dropdown-item {
   font-size: 22px;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 
 .navbar-nav .nav-link {
   font-size: 2rem;
-  margin-left: 2rem;
+  margin-left: 1.5rem;
 }
 </style>

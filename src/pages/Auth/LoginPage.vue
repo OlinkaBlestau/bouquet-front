@@ -32,7 +32,7 @@
         Enter in account
       </MyButton>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-top: 15px">
       <a href="/register">I don’t have an account</a>
     </div>
   </form>
@@ -123,7 +123,6 @@ form h2 {
   text-align: center;
   color: #3a0000;
   font-family: "Marmelad", sans-serif;
-
   margin-bottom: 60px;
   font-size: 43px;
   letter-spacing: 5px;
@@ -141,7 +140,7 @@ a {
 label {
   position: relative;
   top: 21px;
-  font-size: 30px;
+  font-size: 23px;
   color: #3a0000;
 }
 </style>

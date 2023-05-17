@@ -54,6 +54,12 @@ h2 {
   color: white;
   width: 15%;
   padding: 10px 5px;
-  font-size: 1.4vw;
+  font-size: 1.2vw;
+  margin-top: 20px;
+}
+
+.btn-add:hover {
+  background-color: #fff;
+  color: #3a0000;
 }
 </style>

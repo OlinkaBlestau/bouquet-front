@@ -101,7 +101,7 @@
     <footer class="m-auto">
       <div class="footer-cont d-flex justify-content-between">
         <div class="address-info">
-          <h2 class="text-left" style="margin-top: 40px">
+          <h2 class="text-left" style="margin-top: 47px">
             Email: {{ shop.email }}
           </h2>
           <h2 class="text-left" style="margin-top: 30px">
@@ -164,9 +164,9 @@ export default {
 </script>
 <style scoped>
 .address-info h2 {
-  font-family: "Klee One", cursive;
-  font-size: 1.6vw;
-  margin-left: 300px;
+  font-family: "Comfortaa", cursive;
+  font-size: 1.3vw;
+  margin: 0 0 40px 300px;
 }
 .social-icons {
   list-style: none;
@@ -186,6 +186,10 @@ export default {
   align-items: center;
   text-decoration: none;
   color: #333;
+}
+
+.social-icons span {
+  font-size: 1.3vw;
 }
 
 .social-icons img {
@@ -220,7 +224,7 @@ export default {
 .info-section4-list {
   margin-top: 60px;
   font-size: 30px;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 .info-section3-list h1,
 .info-section4-list h1 {
@@ -238,7 +242,7 @@ export default {
 .info-section5-list {
   margin-top: 30px;
   font-size: 30px;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 .info-section5-list h1 {
   color: #23a79e;
@@ -298,13 +302,13 @@ export default {
   font-family: "Marmelad", sans-serif;
 }
 .info-section2-list {
-  margin-top: 90px;
+  margin-top: 75px;
   font-size: 30px;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 .info-section2-list ul li {
   list-style: none;
-  margin-bottom: 8px;
+  margin-bottom: 25px;
 }
 
 .section-title {

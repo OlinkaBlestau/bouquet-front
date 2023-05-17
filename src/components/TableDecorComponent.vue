@@ -77,8 +77,8 @@ export default {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-family: "Klee One", cursive;
-  letter-spacing: 2px;
+  font-family: "Comfortaa", cursive;
+  letter-spacing: 1px;
   font-size: 1.3vw;
   color: #3a0000;
   border: 1px solid #000; /* Change the border color to black */

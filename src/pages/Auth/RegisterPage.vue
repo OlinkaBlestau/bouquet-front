@@ -84,7 +84,7 @@
         Make an account
       </MyButton>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="margin-top: 15px">
       <a href="/login">I have already an account</a>
     </div>
   </form>
@@ -176,7 +176,7 @@ form h2 {
 }
 
 .form-group {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 a {
   color: #3a0000;
@@ -187,7 +187,7 @@ a {
 label {
   position: relative;
   top: 21px;
-  font-size: 30px;
+  font-size: 23px;
   color: #3a0000;
 }
 </style>
