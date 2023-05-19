@@ -104,7 +104,11 @@
           <h2 class="text-left" style="margin-top: 47px">
             Email: {{ shop.email }}
           </h2>
-          <h2 class="text-left" style="margin-top: 30px">
+          <h2
+            class="text-left"
+            style="margin-top: 30px"
+            href="https://www.google.com/maps/place/%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F+%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%B8,+14,+%D0%A5%D0%B0%D1%80%D0%BA%D1%96%D0%B2,+%D0%A5%D0%B0%D1%80%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+61000/@50.0035819,36.236927,15.92z/data=!4m5!3m4!1s0x4127a0dd7f5b56d1:0x738b2b1325130e3!8m2!3d50.0031556!4d36.2393487"
+          >
             Address: {{ shop.address }}
           </h2>
           <h2 class="text-left" style="margin-top: 30px">

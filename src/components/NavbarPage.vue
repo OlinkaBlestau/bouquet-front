@@ -39,16 +39,20 @@
               <li>
                 <a
                   class="dropdown-item"
+                  style="font-size: 22px"
+                  @click="$router.push(`/view-bouquets`)"
+                  >View bouquets</a
+                >
+              </li>
+
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item"
                   @click="$router.push('/create-bouquet')"
                   style="font-size: 22px"
                   href="#"
-                  >Create</a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" style="font-size: 22px" href="#"
-                  >View all my bouquets</a
+                  >Create bouquet</a
                 >
               </li>
             </ul>
