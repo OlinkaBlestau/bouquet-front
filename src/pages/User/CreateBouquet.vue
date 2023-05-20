@@ -68,7 +68,14 @@
                 class="components-icon"
                 :src="getImgUrl(item.img_path)"
                 :alt="item.type"
-                @click="addNewElementToGrid(item.img_path, item.id)"
+                @click="
+                  addNewElementToGrid(
+                    item.img_path,
+                    item.id,
+                    'decor',
+                    item.price
+                  )
+                "
               />
             </div>
           </div>
@@ -78,7 +85,14 @@
                 class="components-icon"
                 :src="getImgUrl(item.img_path)"
                 :alt="item.type"
-                @click="addNewElementToGrid(item.img_path, item.id)"
+                @click="
+                  addNewElementToGrid(
+                    item.img_path,
+                    item.id,
+                    'flower',
+                    item.price
+                  )
+                "
               />
             </div>
           </div>
@@ -88,7 +102,6 @@
         <div v-for="(element, index) in gridElements" :key="index">
           <DDR
             style="min-width: 8%; object-fit: contain; height: auto"
-            :style="getDefaultStyleForElement"
             :onResize="handleResizeAction"
             :beforeActive="() => handleActive(element.id)"
             :active="index === selectedElementIndex"
@@ -121,7 +134,13 @@
 import GridComponent from "@/components/DnD/GridComponent.vue";
 import DDR from "yoyoo-ddr-vue3";
 import "yoyoo-ddr-vue3/dist/yoyoo-ddr-vue3.css";
-import { getDecors, getFlowers } from "@/api/api_request";
+import {
+  createBouquet,
+  getBouquet,
+  getDecors,
+  getFlowers,
+} from "@/api/api_request";
+import { mapGetters } from "vuex";
 
 export default {
   name: "CreateBouquet",
@@ -139,16 +158,7 @@ export default {
     };
   },
   computed: {
-    getGridWidth() {
-      let grid = document.querySelector(".grid");
-
-      return grid.clientWidth;
-    },
-    getGridHeight() {
-      let grid = document.querySelector(".grid");
-
-      return grid.clientHeight;
-    },
+    ...mapGetters(["getUserId"]),
     getDefaultAttributesForElement() {
       return {
         x: 700,
@@ -158,15 +168,10 @@ export default {
         rotation: 0,
       };
     },
-    getDefaultStyleForElement() {
-      return {
-        /*top: this.getGridHeight,
-        right: this.getGridWidth,*/
-        /* top: 200,
-        left: 200,*/
-        /*width: 300,
-        height: 300,*/
-      };
+    getTotalPrice() {
+      return this.gridElements.reduce((accumulator, object) => {
+        return accumulator + object.price;
+      }, 0);
     },
   },
   beforeMount() {
@@ -186,6 +191,9 @@ export default {
         };
       });
     });
+    getBouquet(1).then((response) => {
+      this.gridElements = JSON.parse(response.data.bouquet.configuration);
+    });
   },
   methods: {
     show(type) {
@@ -195,7 +203,7 @@ export default {
         this.isDecor = false;
       }
     },
-    addNewElementToGrid(imageId, elementId) {
+    addNewElementToGrid(imageId, elementId, type, price) {
       this.gridElements.push({
         ...{
           transform: {
@@ -203,7 +211,12 @@ export default {
             id: elementId,
           },
         },
-        ...{ image_id: imageId, id: elementId },
+        ...{
+          image_id: imageId,
+          id: elementId,
+          type: type,
+          price: Number.parseInt(price),
+        },
       });
       this.selectedElementIndex = this.gridElements.length - 1;
     },
@@ -264,7 +277,12 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           const inputValue = result.value;
-          console.log(inputValue);
+          createBouquet({
+            user_id: this.getUserId,
+            name: inputValue,
+            total_price: this.getTotalPrice,
+            configuration: this.gridElements,
+          });
         }
       });
     },
