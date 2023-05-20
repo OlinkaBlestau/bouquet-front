@@ -27,12 +27,12 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 
 .app {
   min-height: 100vh;
   height: 100%;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 </style>

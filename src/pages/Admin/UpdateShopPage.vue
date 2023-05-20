@@ -1,6 +1,6 @@
 <template>
   <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
-    <h2 class="mx-auto">Edit profile</h2>
+    <h2 class="mx-auto">Edit Shop</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
         <label for="">Email</label>
@@ -80,7 +80,12 @@
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <MyButton @click="submit" type="submit" class="btn">
+      <MyButton
+        @click="submit"
+        type="submit"
+        class="btn"
+        style="margin-top: 20px"
+      >
         Save changes
       </MyButton>
     </div>
@@ -163,21 +168,21 @@ form {
   padding: 64px;
   margin-bottom: 30px;
   position: relative;
-  top: 100px;
+  top: 80px;
   width: 40%;
   border-radius: 60px;
 }
 form h2 {
   text-align: center;
   color: #3a0000;
+  font-family: "Marmelad", sans-serif;
   margin-bottom: 60px;
   font-size: 43px;
   letter-spacing: 5px;
-  font-weight: bold;
 }
 
 .form-group {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 a {
   color: #3a0000;
@@ -188,7 +193,7 @@ a {
 label {
   position: relative;
   top: 21px;
-  font-size: 30px;
+  font-size: 23px;
   color: #3a0000;
 }
 </style>

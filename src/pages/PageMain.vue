@@ -13,8 +13,8 @@
           alt="Logo"
         />
         <div class="section-info">
-          <h1 class="section-title">Create your</h1>
-          <h2 class="section-title">dream</h2>
+          <h1 class="section-title" style="font-size: 115px">Create your</h1>
+          <h2 class="section-title" style="font-size: 115px">dream</h2>
           <button @click="$router.push('/login')" class="section-button">
             Enter to account
           </button>
@@ -99,18 +99,112 @@
       </div>
     </section>
     <footer class="m-auto">
-      <h2 class="text-center mt-4" style="font-size: 1vw">
-        Здесь должен быть текст футера
-      </h2>
+      <div class="footer-cont d-flex justify-content-between">
+        <div class="address-info">
+          <h2 class="text-left" style="margin-top: 47px">
+            Email: {{ shop.email }}
+          </h2>
+          <h2
+            class="text-left"
+            style="margin-top: 30px"
+            href="https://www.google.com/maps/place/%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F+%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%B8,+14,+%D0%A5%D0%B0%D1%80%D0%BA%D1%96%D0%B2,+%D0%A5%D0%B0%D1%80%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+61000/@50.0035819,36.236927,15.92z/data=!4m5!3m4!1s0x4127a0dd7f5b56d1:0x738b2b1325130e3!8m2!3d50.0031556!4d36.2393487"
+          >
+            Address: {{ shop.address }}
+          </h2>
+          <h2 class="text-left" style="margin-top: 30px">
+            Phone: {{ shop.phone }}
+          </h2>
+        </div>
+        <div
+          class="row"
+          style="margin-right: 300px; margin-top: 35px; margin-bottom: 20px"
+        >
+          <div class="col-md-12">
+            <ul class="social-icons">
+              <li>
+                <a href="https://web.telegram.org/k/" target="_blank">
+                  <img src="../assets/images/telegram.png" alt="Facebook" />
+                  <span class="social-text">Telegram</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://uk-ua.facebook.com/" target="_blank">
+                  <img src="../assets/images/facebook.png" alt="Twitter" />
+                  <span class="social-text">Facebook</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/accounts/login/?next=https%3A%2F%2Fwww.instagram.com%2F"
+                  target="_blank"
+                >
+                  <img src="../assets/images/instagram.png" alt="Instagram" />
+                  <span class="social-text">Instagram</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </footer>
   </div>
 </template>
 <script>
+import { getShop } from "@/api/api_request";
+
 export default {
   name: "PageMain",
+  data() {
+    return {
+      shop: [],
+    };
+  },
+  beforeMount() {
+    getShop(1).then((response) => {
+      this.shop = response.data.shop;
+    });
+  },
 };
 </script>
 <style scoped>
+.address-info h2 {
+  font-family: "Comfortaa", cursive;
+  font-size: 1.3vw;
+  margin: 0 0 40px 300px;
+}
+.social-icons {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons li {
+  margin-bottom: 20px;
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.social-icons span {
+  font-size: 1.3vw;
+}
+
+.social-icons img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.social-text {
+  font-size: 1.6vw;
+}
 #section2 {
   background-color: #fff;
   width: 80%;
@@ -134,12 +228,12 @@ export default {
 .info-section4-list {
   margin-top: 60px;
   font-size: 30px;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 .info-section3-list h1,
 .info-section4-list h1 {
   color: #23a79e;
-  font-weight: 700;
+  font-family: "Marmelad", sans-serif;
   font-size: 5vw;
   margin-bottom: 50px;
 }
@@ -152,12 +246,12 @@ export default {
 .info-section5-list {
   margin-top: 30px;
   font-size: 30px;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 .info-section5-list h1 {
   color: #23a79e;
-  font-weight: 700;
   font-size: 5vw;
+  font-family: "Marmelad", sans-serif;
   margin-bottom: 50px;
 }
 .info-section5-list ul li {
@@ -212,21 +306,20 @@ export default {
   font-family: "Marmelad", sans-serif;
 }
 .info-section2-list {
-  margin-top: 90px;
+  margin-top: 75px;
   font-size: 30px;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 .info-section2-list ul li {
   list-style: none;
-  margin-bottom: 8px;
+  margin-bottom: 25px;
 }
 
 .section-title {
   color: #e1225d;
   font-weight: 700;
   font-family: "Marmelad", sans-serif;
-  font-size: 50px;
-  margin-right: 30px;
+  margin-right: -20px;
 }
 .section-info h1 {
   right: 250px;

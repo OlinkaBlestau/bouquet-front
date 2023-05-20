@@ -16,7 +16,7 @@ export default {
   border: 1px solid #3a0000;
   background-color: #3a0000;
   color: white;
-  font-size: 24px;
+  font-size: 21px;
   border-radius: 10px;
   margin-bottom: 20px;
 }

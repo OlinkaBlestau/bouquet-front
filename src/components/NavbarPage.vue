@@ -39,16 +39,20 @@
               <li>
                 <a
                   class="dropdown-item"
+                  style="font-size: 22px"
+                  @click="$router.push(`/view-bouquets`)"
+                  >View bouquets</a
+                >
+              </li>
+
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item"
                   @click="$router.push('/create-bouquet')"
                   style="font-size: 22px"
                   href="#"
-                  >Create</a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" style="font-size: 22px" href="#"
-                  >View all my bouquets</a
+                  >Create bouquet</a
                 >
               </li>
             </ul>
@@ -65,14 +69,53 @@
           <li class="nav-item" v-if="isAuth && getRole == 'admin'">
             <a class="nav-link" :href="`/shop-info/${1}`">Orders</a>
           </li>
-          <li class="nav-item" v-if="isAuth && getRole == 'admin'">
-            <a class="nav-link" :href="`/shop-info/${1}`">Shop</a>
+          <!--          <li class="nav-item" v-if="isAuth && getRole == 'admin'">-->
+          <!--            <a class="nav-link" :href="`/shop-info/${1}`">Shop</a>-->
+          <!--          </li>-->
+          <li class="nav-item dropdown">
+            <a
+              v-if="isAuth && getRole == 'admin'"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item"
+                  @click="$router.push(`/shop-info/${1}`)"
+                  style="font-size: 22px"
+                  href="#"
+                  >Shop information</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  @click="$router.push(`/profile/${getUserId}`)"
+                  style="font-size: 22px"
+                  href="#"
+                  >Profile information</a
+                >
+              </li>
+            </ul>
           </li>
           <li class="nav-item" v-if="isAuth && getRole == 'user'">
             <a class="nav-link" :href="`/contact`">Contacts</a>
           </li>
           <li class="nav-item" v-if="isAuth">
-            <a class="nav-link" @click="exit" :href="`/view-flowers`">Logout</a>
+            <a
+              class="nav-link"
+              @click="exit"
+              :href="`/view-flowers`"
+              style="color: #e1225d"
+              >Logout</a
+            >
           </li>
           <li class="nav-item dropdown">
             <a
@@ -81,19 +124,26 @@
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              style="color: #e1225d"
             >
               En
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" style="font-size: 22px" href="#"
-                  >Англійська</a
+                <a
+                  class="dropdown-item"
+                  style="font-size: 22px; text-align: center"
+                  href="#"
+                  >En</a
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
               <li>
-                <a class="dropdown-item" style="font-size: 22px" href="#"
-                  >Українська</a
+                <a
+                  class="dropdown-item"
+                  style="font-size: 22px; text-align: center"
+                  href="#"
+                  >Ua</a
                 >
               </li>
             </ul>
@@ -150,16 +200,22 @@ nav {
 }
 .navbar-nav {
   margin-left: auto;
-  font-size: 2.4rem;
+  font-size: 2rem;
   color: #3a0000;
-  font-family: "Klee One", cursive;
+  font-family: "Comfortaa", cursive;
 }
 
 .navbar-nav .nav-item a {
   color: #3a0000;
+  font-size: 1.8rem;
 }
+.dropdown-item {
+  font-size: 22px;
+  font-family: "Comfortaa", cursive;
+}
+
 .navbar-nav .nav-link {
-  font-size: 2.4rem;
-  margin-left: 2rem;
+  font-size: 2rem;
+  margin-left: 1.5rem;
 }
 </style>

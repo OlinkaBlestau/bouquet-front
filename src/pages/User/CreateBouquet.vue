@@ -1,30 +1,9 @@
 <template>
   <div class="app-container">
-    <div class="vs-header">
-      <h1>DEMO Project</h1>
+    <div class="vs-header d-flex justify-content-end">
       <div class="header-actions">
         <button
-          title="Return to the previous state"
-          data-action="undo"
-          @click="undoElement"
-        >
-          Undo
-        </button>
-        <button
-          title="Return to the next state"
-          data-action="redo"
-          @click="redoElement"
-        >
-          Redo
-        </button>
-        <button
-          title="Duplicate selected component"
-          data-action="duplicate"
-          @click="duplicateElement"
-        >
-          Duplicate
-        </button>
-        <button
+          style="background-color: #e1225d"
           title="Delete selected component"
           data-action="delete"
           @click="deleteElement"
@@ -38,25 +17,81 @@
         >
           Clear
         </button>
+        <button
+          title="Clear all components in the editing area"
+          data-action="clear"
+          @click="saveBouquet"
+        >
+          Save
+        </button>
+        <button
+          title="Clear all components in the editing area"
+          data-action="clear"
+          @click="makeOrder"
+        >
+          Make an order
+        </button>
       </div>
     </div>
     <div class="d-flex">
-      <div class="vs-components">
-        <div v-for="item in draggableElements" :key="item.id">
-          <img
-            class="components-icon"
-            :src="getImgUrl(item.id)"
-            :alt="item.type"
-            @click="addNewElementToGrid(item.id, item.id)"
-          />
-          {{ item.name }}
+      <div class="vs-components flex-column justify-content-center">
+        <div>
+          <button
+            class="mb-5"
+            style="width: 50%; height: 80px; font-size: 1.3vw"
+            :style="{
+              backgroundColor: isDecor ? '#E1225D' : '#fff',
+              borderColor: isDecor ? '#E1225D' : '#fff',
+              color: isDecor ? '#fff' : '#000',
+            }"
+            @click="show('decor')"
+          >
+            Decors
+          </button>
+          <button
+            class="mb-5"
+            style="width: 50%; height: 80px; color: #ffffff; font-size: 1.3vw"
+            :style="{
+              backgroundColor: !isDecor ? '#E1225D' : '#fff',
+              borderColor: !isDecor ? '#E1225D' : '#fff',
+              color: !isDecor ? '#fff' : '#000',
+            }"
+            @click="show('flower')"
+          >
+            Flowers
+          </button>
+        </div>
+        <div>
+          <div v-if="isDecor === true">
+            <div v-for="item in decors" :key="item.id" class="components-item">
+              <img
+                class="components-icon"
+                :src="getImgUrl(item.img_path)"
+                :alt="item.type"
+                @click="addNewElementToGrid(item.img_path, item.id)"
+              />
+            </div>
+          </div>
+          <div v-else>
+            <div v-for="item in flowers" :key="item.id" class="components-item">
+              <img
+                class="components-icon"
+                :src="getImgUrl(item.img_path)"
+                :alt="item.type"
+                @click="addNewElementToGrid(item.img_path, item.id)"
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div>
         <div v-for="(element, index) in gridElements" :key="index">
           <DDR
+            style="min-width: 8%; object-fit: contain; height: auto"
             :style="getDefaultStyleForElement"
             :onResize="handleResizeAction"
+            :beforeActive="() => handleActive(element.id)"
+            :active="index === selectedElementIndex"
             :onRotate="handleRotateAction"
             :onDrag="handleDragAction"
             :value="element.transform"
@@ -65,7 +100,14 @@
               <img
                 class="components-icon"
                 :src="getImgUrl(element.image_id)"
-                v-bind:alt="element.type"
+                :alt="element.type"
+                :style="{
+                  objectFit: 'contain',
+                  minWidth: '10%',
+                  minHeight: '10%',
+                  width: '100%',
+                  height: '100%',
+                }"
               />
             </div>
           </DDR>
@@ -79,14 +121,7 @@
 import GridComponent from "@/components/DnD/GridComponent.vue";
 import DDR from "yoyoo-ddr-vue3";
 import "yoyoo-ddr-vue3/dist/yoyoo-ddr-vue3.css";
-import { components } from "@/assets/dnd/draggable_components";
-import {
-  EVENT_APPLICATION_UNDO,
-  EVENT_APPLICATION_REDO,
-  EVENT_COMPONENT_DUPLICATE,
-  EVENT_COMPONENT_DELETE,
-  EVENT_APPLICATION_CLEAR,
-} from "yoyoo-ddr-vue3";
+import { getDecors, getFlowers } from "@/api/api_request";
 
 export default {
   name: "CreateBouquet",
@@ -96,8 +131,11 @@ export default {
   },
   data() {
     return {
-      draggableElements: components,
       gridElements: [],
+      decors: [],
+      flowers: [],
+      isDecor: true,
+      selectedElementIndex: -1, // Индекс выбранного элемента
     };
   },
   computed: {
@@ -113,8 +151,8 @@ export default {
     },
     getDefaultAttributesForElement() {
       return {
-        x: 0,
-        y: 0,
+        x: 700,
+        y: 200,
         width: 100,
         height: 100,
         rotation: 0,
@@ -131,7 +169,32 @@ export default {
       };
     },
   },
+  beforeMount() {
+    getDecors().then((response) => {
+      this.decors = response.data.decors.data.map((decor) => {
+        return {
+          ...decor,
+          active: false, // Установите значение по умолчанию
+        };
+      });
+    });
+    getFlowers().then((response) => {
+      this.flowers = response.data.flowers.data.map((flower) => {
+        return {
+          ...flower,
+          active: false, // Установите значение по умолчанию
+        };
+      });
+    });
+  },
   methods: {
+    show(type) {
+      if (type === "decor") {
+        this.isDecor = true;
+      } else {
+        this.isDecor = false;
+      }
+    },
     addNewElementToGrid(imageId, elementId) {
       this.gridElements.push({
         ...{
@@ -142,15 +205,10 @@ export default {
         },
         ...{ image_id: imageId, id: elementId },
       });
+      this.selectedElementIndex = this.gridElements.length - 1;
     },
-    getImgUrl(id) {
-      let imageElement = this.draggableElements.filter(
-        (element) => element.id === id
-      );
-
-      imageElement = imageElement[0];
-      let images = require.context("@/assets/dnd", false, /\.png$/);
-      return images("./" + imageElement.type + ".png");
+    getImgUrl(imagePath) {
+      return `http://localhost/storage/${imagePath}`;
     },
     handleDragAction(event, transform) {
       this.defaultHandlerAction(transform);
@@ -160,6 +218,11 @@ export default {
     },
     handleRotateAction(event, transform) {
       this.defaultHandlerAction(transform);
+    },
+    handleActive(id) {
+      this.selectedElementIndex = this.gridElements.findIndex(
+        (element) => element.id === id
+      );
     },
     defaultHandlerAction(transform) {
       if (transform !== undefined) {
@@ -177,20 +240,33 @@ export default {
         };
       }
     },
-    undoElement() {
-      this.eventbus.$emit(EVENT_APPLICATION_UNDO);
-    },
-    redoElement() {
-      this.eventbus.$emit(EVENT_APPLICATION_REDO);
-    },
-    duplicateElement() {
-      this.eventbus.$emit(EVENT_COMPONENT_DUPLICATE);
-    },
     deleteElement() {
-      this.eventbus.$emit(EVENT_COMPONENT_DELETE);
+      console.log(this.selectedElementIndex);
+      if (this.selectedElementIndex === -1) {
+        this.selectedElementIndex = this.gridElements.length - 1;
+      }
+      if (this.selectedElementIndex !== -1) {
+        this.gridElements.splice(this.selectedElementIndex, 1);
+        this.selectedElementIndex = -1; // Сброс выбранного элемента после удаления
+      }
     },
     clearGrid() {
-      this.eventbus.$emit(EVENT_APPLICATION_CLEAR);
+      if (this.gridElements.length > 0) {
+        this.gridElements = [];
+      }
+    },
+    saveBouquet() {
+      this.$swal({
+        title: "Введите название",
+        input: "text",
+        showCancelButton: true,
+        confirmButtonText: "Submit",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const inputValue = result.value;
+          console.log(inputValue);
+        }
+      });
     },
   },
 };
@@ -198,7 +274,7 @@ export default {
 
 <style lang="less" scoped>
 .vs-components {
-  width: 200px;
+  width: 500px;
   border-right: 1px solid #ececec;
   position: relative;
   overflow-y: scroll;
@@ -207,9 +283,9 @@ export default {
     display: none;
   }
   .components-icon {
-    width: 35px;
-    height: 35px;
-    margin-bottom: 6px;
+    width: 150px;
+    object-fit: contain;
+    height: 150px;
   }
 }
 
@@ -218,10 +294,7 @@ export default {
   width: 50%;
   float: left;
   display: flex;
-  &:nth-child(2n + 1) {
-    border-right: 1px solid #ececec;
-  }
-  border-bottom: 1px solid #ececec;
+  margin-bottom: 100px;
   align-items: center;
   justify-content: center;
   cursor: move;
@@ -233,11 +306,11 @@ export default {
 }
 
 .vs-header {
-  height: 50px;
+  height: 80px;
   border-bottom: 1px solid #ececec;
   display: flex;
   align-items: center;
-  background: #f8f8f8;
+  background: #fff;
   h1 {
     text-align: center;
     font-size: 20px;
@@ -251,10 +324,9 @@ export default {
   }
   button {
     padding: 5px 12px;
-    font-size: 16px;
-    color: #555;
-    background: #eee;
-    background-image: linear-gradient(to bottom, #fcfcfc 0, #eee 100%);
+    font-size: 1.3vw;
+    color: #fff;
+    background: #e1225d;
     border: 1px solid #d5d5d5;
     margin-right: 20px;
     border-radius: 4px;

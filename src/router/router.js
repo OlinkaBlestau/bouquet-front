@@ -15,6 +15,7 @@ import ViewDecorPage from "@/pages/Admin/ViewDecorPage.vue";
 import ViewFlowersPage from "@/pages/Admin/ViewFlowersPage.vue";
 import CreateBouquet from "@/pages/User/CreateBouquet.vue";
 import ContactsPage from "@/pages/User/ContactsPage.vue";
+import BouquetsPage from "@/pages/User/BouquetsPage.vue";
 
 const routes = [
   {
@@ -140,6 +141,23 @@ const routes = [
       next();
     },
   },
+
+  {
+    path: "/view-bouquets",
+    component: BouquetsPage,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "admin"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+
   {
     path: "/view-flowers",
     component: ViewFlowersPage,

@@ -1,5 +1,5 @@
 <template>
-  <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
+  <form class="container mx-auto" @submit.prevent>
     <h2 class="mx-auto">Add flower</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
@@ -69,7 +69,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <MyButton @click="submit" type="submit" class="btn">
-        Save changes
+        Add flower
       </MyButton>
     </div>
   </form>
@@ -123,7 +123,7 @@ export default {
               popup: "animate__animated animate__fadeOutUp",
             },
           });
-          // window.location.href = "/view-decors";
+          window.location.href = "/view-flowers";
         })
         .catch(() => {
           this.$swal({
@@ -150,23 +150,23 @@ export default {
 form {
   background-color: #ffdede;
   padding: 64px;
-  margin-bottom: 30px;
   position: relative;
-  top: 100px;
+  top: 80px;
   width: 40%;
   border-radius: 60px;
 }
+
 form h2 {
   text-align: center;
   color: #3a0000;
   margin-bottom: 60px;
   font-size: 43px;
+  font-family: "Marmelad", sans-serif;
   letter-spacing: 5px;
-  font-weight: bold;
 }
 
 .form-group {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 a {
   color: #3a0000;
@@ -177,7 +177,7 @@ a {
 label {
   position: relative;
   top: 21px;
-  font-size: 30px;
+  font-size: 23px;
   color: #3a0000;
 }
 </style>

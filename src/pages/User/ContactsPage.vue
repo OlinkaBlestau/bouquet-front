@@ -83,9 +83,11 @@ export default {
 .contacts-info-item {
   position: relative;
   width: 37%;
+  height: 40%;
   font-size: 1.2vw;
   background-color: #ffdede;
-  padding: 40px;
+  padding: 25px;
+  box-shadow: 0 5px 10px -2px gray;
   top: 88px;
   left: 280px;
   border-radius: 25px;
@@ -100,12 +102,15 @@ export default {
 
 .social-info-item {
   position: relative;
-  top: 250px;
-  left: 670px;
+  top: 272px;
+  left: 645px;
   width: 37%;
+  height: 40%;
   font-size: 1.2vw;
   background-color: #ffdede;
-  padding: 40px;
+  padding: 25px;
+  box-shadow: 0 5px 10px -2px gray;
+
   border-radius: 25px;
   z-index: 2;
 }
