@@ -16,6 +16,8 @@ import ViewFlowersPage from "@/pages/Admin/ViewFlowersPage.vue";
 import CreateBouquet from "@/pages/User/CreateBouquet.vue";
 import ContactsPage from "@/pages/User/ContactsPage.vue";
 import BouquetsPage from "@/pages/User/BouquetsPage.vue";
+import ViewOrdersPage from "@/pages/Admin/ViewOrdersPage.vue";
+import CurrentOrderPage from "@/pages/Admin/CurrentOrderPage.vue";
 
 const routes = [
   {
@@ -129,6 +131,37 @@ const routes = [
   {
     path: "/view-decors",
     component: ViewDecorPage,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "user"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+
+  {
+    path: "/view-orders-admin",
+    component: ViewOrdersPage,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "user"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+  {
+    path: "/current-order-admin",
+    component: CurrentOrderPage,
     beforeEnter: (to, from, next) => {
       if (
         store.getters["isAuth"] === false ||

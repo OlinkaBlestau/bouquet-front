@@ -2,13 +2,13 @@
   <table class="table table-bordered">
     <thead style="background-color: #ffdede">
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Color</th>
-        <th scope="col">Price</th>
-        <th scope="col">Amount</th>
-        <th scope="col">IMG</th>
-        <th scope="col">EDIT</th>
-        <th scope="col">DELETE</th>
+        <th scope="col">{{ $t("tables.name") }}</th>
+        <th scope="col">{{ $t("tables.color") }}</th>
+        <th scope="col">{{ $t("tables.Price") }}</th>
+        <th scope="col">{{ $t("tables.Amount") }}</th>
+        <th scope="col">{{ $t("tables.img") }}</th>
+        <th scope="col">{{ $t("tables.edit") }}</th>
+        <th scope="col">{{ $t("tables.delete") }}</th>
       </tr>
     </thead>
     <tbody style="background-color: #ffffff">

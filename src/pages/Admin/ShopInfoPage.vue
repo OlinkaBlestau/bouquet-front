@@ -5,18 +5,18 @@
         class="text-center"
         style="position: relative; top: 10px; margin-bottom: 60px"
       >
-        View shop
+        {{ $t("shop.viewshop") }}
       </h1>
       <div class="info-block d-flex justify-content-between">
         <p>Email</p>
         <p>{{ shop.email }}</p>
       </div>
       <div class="info-block d-flex justify-content-between">
-        <p>Phone</p>
+        <p>{{ $t("shop.phone") }}</p>
         <p>{{ shop.phone }}</p>
       </div>
       <div class="info-block d-flex justify-content-between">
-        <p>Address</p>
+        <p>{{ $t("shop.address") }}</p>
         <p>{{ shop.address }}</p>
       </div>
       <div class="info-block d-flex justify-content-between">
@@ -35,7 +35,7 @@
         class="btn d-block mx-auto"
         @click="$router.push(`/shop-update/${shop.id}`)"
       >
-        Edit shop
+        {{ $t("shop.btnedit") }}
       </button>
     </div>
   </div>

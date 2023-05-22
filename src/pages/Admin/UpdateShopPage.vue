@@ -1,6 +1,6 @@
 <template>
   <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
-    <h2 class="mx-auto">Edit Shop</h2>
+    <h2 class="mx-auto">{{ $t("shop.esitprofile") }}</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
         <label for="">Email</label>
@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Phone</label>
+        <label for="">{{ $t("shop.phone") }}</label>
         <MyInput
           type="phone"
           class="form-control"
@@ -29,7 +29,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Address</label>
+        <label for="">{{ $t("shop.address") }}</label>
         <MyInput
           type="address"
           class="form-control"
@@ -86,7 +86,7 @@
         class="btn"
         style="margin-top: 20px"
       >
-        Save changes
+        {{ $t("shop.btnsave") }}
       </MyButton>
     </div>
   </form>

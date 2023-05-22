@@ -1,9 +1,9 @@
 <template>
   <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
-    <h2 class="mx-auto">Sign Up</h2>
+    <h2 class="mx-auto">{{ $t("signup.signup") }}</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">First name</label>
+        <label for="">{{ $t("signup.firstname") }}</label>
         <MyInput
           type="firstname"
           class="form-control"
@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Last name</label>
+        <label for="">{{ $t("signup.lastname") }}</label>
         <MyInput
           type="lastname"
           class="form-control"
@@ -42,7 +42,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Address</label>
+        <label for="">{{ $t("signup.address") }}</label>
         <MyInput
           type="address"
           class="form-control"
@@ -55,7 +55,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Phone</label>
+        <label for="">{{ $t("signup.phone") }}</label>
         <MyInput
           type="phone"
           class="form-control"
@@ -68,7 +68,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Password</label>
+        <label for="">{{ $t("signup.password") }}</label>
         <MyInput
           type="password"
           class="form-control"
@@ -81,11 +81,11 @@
     </div>
     <div class="d-flex justify-content-center">
       <MyButton @click="submit" type="submit" class="btn">
-        Make an account
+        {{ $t("signup.btnenter") }}
       </MyButton>
     </div>
     <div class="d-flex justify-content-center" style="margin-top: 15px">
-      <a href="/login">I have already an account</a>
+      <a href="/login">{{ $t("signup.login") }}</a>
     </div>
   </form>
 </template>

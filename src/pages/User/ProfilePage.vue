@@ -5,14 +5,14 @@
         class="text-center"
         style="position: relative; top: 10px; margin-bottom: 60px"
       >
-        View profile
+        {{ $t("signup.viewprofile") }}
       </h1>
       <div class="info-block d-flex justify-content-between">
-        <p>Fist name</p>
+        <p>{{ $t("signup.firstname") }}</p>
         <p>{{ user.first_name }}</p>
       </div>
       <div class="info-block d-flex justify-content-between">
-        <p>Last name</p>
+        <p>{{ $t("signup.lastname") }}</p>
         <p>{{ user.last_name }}</p>
       </div>
       <div class="info-block d-flex justify-content-between">
@@ -20,18 +20,18 @@
         <p>{{ user.email }}</p>
       </div>
       <div class="info-block d-flex justify-content-between">
-        <p>Address</p>
+        <p>{{ $t("signup.address") }}</p>
         <p>{{ user.address }}</p>
       </div>
       <div class="info-block d-flex justify-content-between">
-        <p>Phone</p>
+        <p>{{ $t("signup.phone") }}</p>
         <p>{{ user.phone }}</p>
       </div>
       <button
         class="btn d-block mx-auto"
         @click="$router.push(`/profile-update/${user.id}`)"
       >
-        Edit profile
+        {{ $t("signup.btnedit") }}
       </button>
     </div>
   </div>

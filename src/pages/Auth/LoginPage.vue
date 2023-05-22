@@ -1,6 +1,6 @@
 <template>
   <form class="container mx-auto" @submit.prevent="login">
-    <h2 class="mx-auto">Log In</h2>
+    <h2 class="mx-auto">{{ $t("login.login") }}</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
         <label for="">Email</label>
@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Password</label>
+        <label for="">{{ $t("login.password") }}</label>
         <MyInput
           type="password"
           class="form-control"
@@ -29,11 +29,11 @@
     </div>
     <div class="d-flex justify-content-center">
       <MyButton @click="submit" type="submit" class="btn">
-        Enter in account
+        {{ $t("login.btnenter") }}
       </MyButton>
     </div>
     <div class="d-flex justify-content-center" style="margin-top: 15px">
-      <a href="/register">I don’t have an account</a>
+      <a href="/register">{{ $t("login.signup") }}</a>
     </div>
   </form>
 </template>

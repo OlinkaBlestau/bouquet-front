@@ -1,10 +1,10 @@
 <template>
   <div class="cont m-auto">
-    <h2 class="text-center mb-5">View Flowers</h2>
+    <h2 class="text-center mb-5">{{ $t("tables.viewflowers") }}</h2>
     <TableFlowerComponent :flowers="flowers" />
     <div class="d-flex justify-content-center align-items-center mt-3">
       <button @click="$router.push(`/add-flowers`)" class="btn-add">
-        Add new
+        {{ $t("tables.btnadd") }}
       </button>
     </div>
   </div>
@@ -41,7 +41,7 @@ export default {
 .cont {
   width: 80%;
   position: relative;
-  top: 100px;
+  top: 80px;
 }
 h2 {
   font-family: "Marmelad", sans-serif;

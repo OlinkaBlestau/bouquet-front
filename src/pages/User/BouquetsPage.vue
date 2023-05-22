@@ -1,6 +1,6 @@
 <template>
   <div class="cont m-auto">
-    <h1 class="text-center">View Bouquets</h1>
+    <h1 class="text-center">{{ $t("bouquet.viewbouquet") }}</h1>
     <div class="view-bouquet justify-content-between d-flex">
       <div class="view-bouquet-item">
         <img class="image" src="../../assets/images/bouquet.png" />

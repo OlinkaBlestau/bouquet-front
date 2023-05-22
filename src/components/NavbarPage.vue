@@ -16,13 +16,13 @@
       <div class="collapse mr-5 navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item" v-if="!isAuth">
-            <a class="nav-link" href="/">Main</a>
+            <a class="nav-link" href="/">{{ $t("navbar.main") }}</a>
           </li>
           <li v-if="!isAuth && !isLoginPage" class="nav-item">
-            <a class="nav-link" href="/login">Log in</a>
+            <a class="nav-link" href="/login">{{ $t("navbar.login") }}</a>
           </li>
           <li class="nav-item" v-if="!isRegisterPage && !isAuth">
-            <a class="nav-link" href="/register">Sign up</a>
+            <a class="nav-link" href="/register">{{ $t("navbar.signup") }}</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -33,7 +33,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Bouquet
+              {{ $t("navbar.bouquet") }}
             </a>
             <ul class="dropdown-menu">
               <li>
@@ -41,7 +41,7 @@
                   class="dropdown-item"
                   style="font-size: 22px"
                   @click="$router.push(`/view-bouquets`)"
-                  >View bouquets</a
+                  >{{ $t("navbar.viewbouquets") }}</a
                 >
               </li>
 
@@ -52,22 +52,30 @@
                   @click="$router.push('/create-bouquet')"
                   style="font-size: 22px"
                   href="#"
-                  >Create bouquet</a
+                  >{{ $t("navbar.createbouquet") }}</a
                 >
               </li>
             </ul>
           </li>
           <li v-if="isAuth && getRole == 'user'" class="nav-item">
-            <a class="nav-link" :href="`/profile/${getUserId}`">Profile</a>
+            <a class="nav-link" :href="`/profile/${getUserId}`">{{
+              $t("navbar.profile")
+            }}</a>
           </li>
           <li class="nav-item" v-if="isAuth && getRole == 'admin'">
-            <a class="nav-link" :href="`/view-decors`">Decors</a>
+            <a class="nav-link" :href="`/view-decors`">{{
+              $t("navbar.decors")
+            }}</a>
           </li>
           <li class="nav-item" v-if="isAuth && getRole == 'admin'">
-            <a class="nav-link" :href="`/view-flowers`">Flowers</a>
+            <a class="nav-link" :href="`/view-flowers`">{{
+              $t("navbar.flowers")
+            }}</a>
           </li>
           <li class="nav-item" v-if="isAuth && getRole == 'admin'">
-            <a class="nav-link" :href="`/shop-info/${1}`">Orders</a>
+            <a class="nav-link" :href="`/view-orders-admin`">{{
+              $t("navbar.orders")
+            }}</a>
           </li>
           <!--          <li class="nav-item" v-if="isAuth && getRole == 'admin'">-->
           <!--            <a class="nav-link" :href="`/shop-info/${1}`">Shop</a>-->
@@ -81,7 +89,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Profile
+              {{ $t("navbar.profile") }}
             </a>
             <ul class="dropdown-menu">
               <li>
@@ -90,7 +98,7 @@
                   @click="$router.push(`/shop-info/${1}`)"
                   style="font-size: 22px"
                   href="#"
-                  >Shop information</a
+                  >{{ $t("navbar.shopinfo") }}</a
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
@@ -100,13 +108,20 @@
                   @click="$router.push(`/profile/${getUserId}`)"
                   style="font-size: 22px"
                   href="#"
-                  >Profile information</a
+                  >{{ $t("navbar.profileinfo") }}</a
                 >
               </li>
             </ul>
           </li>
           <li class="nav-item" v-if="isAuth && getRole == 'user'">
-            <a class="nav-link" :href="`/contact`">Contacts</a>
+            <a class="nav-link" :href="`/contact`">{{
+              $t("navbar.myorders")
+            }}</a>
+          </li>
+          <li class="nav-item" v-if="isAuth && getRole == 'user'">
+            <a class="nav-link" :href="`/contact`">{{
+              $t("navbar.contacts")
+            }}</a>
           </li>
           <li class="nav-item" v-if="isAuth">
             <a
@@ -114,7 +129,7 @@
               @click="exit"
               :href="`/view-flowers`"
               style="color: #e1225d"
-              >Logout</a
+              >{{ $t("navbar.exit") }}</a
             >
           </li>
           <li class="nav-item dropdown">
@@ -126,7 +141,7 @@
               aria-expanded="false"
               style="color: #e1225d"
             >
-              En
+              {{ currentLocale }}
             </a>
             <ul class="dropdown-menu">
               <li>
@@ -134,7 +149,8 @@
                   class="dropdown-item"
                   style="font-size: 22px; text-align: center"
                   href="#"
-                  >En</a
+                  @click="setLocale('en')"
+                  >en</a
                 >
               </li>
               <li><hr class="dropdown-divider" /></li>
@@ -143,7 +159,8 @@
                   class="dropdown-item"
                   style="font-size: 22px; text-align: center"
                   href="#"
-                  >Ua</a
+                  @click="setLocale('uk')"
+                  >uk</a
                 >
               </li>
             </ul>
@@ -161,6 +178,9 @@ export default {
   name: "NavbarPage",
   components: {},
   computed: {
+    currentLocale() {
+      return localStorage.getItem("locale");
+    },
     isRegisterPage() {
       return this.$route.path === "/register";
     },
@@ -172,6 +192,10 @@ export default {
     ...mapGetters(["isAuth"]),
   },
   methods: {
+    setLocale: function (locale) {
+      localStorage.setItem("locale", locale);
+      window.location.reload();
+    },
     exit() {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("userId");
@@ -187,7 +211,15 @@ nav {
   height: 100px;
   background-color: #ffdede;
 }
+nav ul li a {
+  text-decoration: none;
+}
 
+nav ul li a:hover,
+nav ul li a:active,
+nav ul li a:focus {
+  text-decoration: underline;
+}
 .navbar-brand {
   background: linear-gradient(to bottom, #3a0000, #ff0101);
   background-clip: text;

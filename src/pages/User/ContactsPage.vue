@@ -6,18 +6,18 @@
           class="text-center"
           style="position: relative; top: 10px; margin-bottom: 40px"
         >
-          Contacts
+          {{ $t("shop.contacts") }}
         </h1>
         <div class="info-block d-flex justify-content-between">
           <p>Email</p>
           <p>{{ shop.email }}</p>
         </div>
         <div class="info-block d-flex justify-content-between">
-          <p>Phone</p>
+          <p>{{ $t("shop.phone") }}</p>
           <p>{{ shop.phone }}</p>
         </div>
         <div class="info-block d-flex justify-content-between">
-          <p>Address</p>
+          <p>{{ $t("shop.address") }}</p>
           <p>{{ shop.address }}</p>
         </div>
       </div>
@@ -27,7 +27,7 @@
           class="text-center"
           style="position: relative; top: 10px; margin-bottom: 40px"
         >
-          Social medias
+          {{ $t("shop.socialmedia") }}
         </h1>
         <div class="info-block d-flex justify-content-between">
           <p>Telegram</p>

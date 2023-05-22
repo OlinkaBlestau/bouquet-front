@@ -13,10 +13,14 @@
           alt="Logo"
         />
         <div class="section-info">
-          <h1 class="section-title" style="font-size: 115px">Create your</h1>
-          <h2 class="section-title" style="font-size: 115px">dream</h2>
+          <h1 class="section-title" style="font-size: 115px">
+            {{ $t("main.maintitle1") }}
+          </h1>
+          <h2 class="section-title" style="font-size: 115px">
+            {{ $t("main.maintitle2") }}
+          </h2>
           <button @click="$router.push('/login')" class="section-button">
-            Enter to account
+            {{ $t("main.enter") }}
           </button>
         </div>
       </div>
@@ -28,18 +32,20 @@
     >
       <div class="info-section2">
         <p style="color: #e1225d; margin-left: 120px; margin-bottom: 0">
-          Visualize
+          {{ $t("main.visualize") }}
         </p>
-        <p style="margin-left: 190px; margin-bottom: 0">your</p>
-        <p style="margin-left: 40px">own bouquet</p>
+        <p style="margin-left: 190px; margin-bottom: 0">
+          {{ $t("main.your") }}
+        </p>
+        <p style="margin-left: 40px">{{ $t("main.ownbouquet") }}</p>
       </div>
       <div class="info-section2-list">
         <ul>
-          <li>✓ Save your time.</li>
-          <li>✓ Design unique bouquets.</li>
-          <li>✓ Decorate.</li>
-          <li>✓ Create anytime, anywhere.</li>
-          <li>✓ Make an order.</li>
+          <li>{{ $t("main.infosection1") }}</li>
+          <li>{{ $t("main.infosection2") }}</li>
+          <li>{{ $t("main.infosection3") }}</li>
+          <li>{{ $t("main.infosection4") }}</li>
+          <li>{{ $t("main.infosection5") }}</li>
         </ul>
       </div>
     </section>
@@ -53,10 +59,10 @@
           />
         </div>
         <div class="info-section3-list">
-          <h1>1. Register</h1>
+          <h1>{{ $t("main.register") }}</h1>
           <ul>
-            <li>✓ Register if you are here for the first time.</li>
-            <li>✓ Log in if you already have an account.</li>
+            <li>{{ $t("main.infosection6") }}</li>
+            <li>{{ $t("main.infosection7") }}</li>
           </ul>
         </div>
       </div>
@@ -64,10 +70,10 @@
     <section id="section4" class="wrap" ref="section4">
       <div style="width: 80%" class="m-auto d-flex justify-content-between">
         <div class="info-section4-list">
-          <h1>2. Create</h1>
+          <h1>{{ $t("main.create") }}</h1>
           <ul>
-            <li>✓ Choose the desired flowers and decor.</li>
-            <li>✓ Use drag and drop to create a bouquet.</li>
+            <li>{{ $t("main.infosection8") }}</li>
+            <li>{{ $t("main.infosection9") }}</li>
           </ul>
         </div>
         <div class="info-section4">
@@ -89,11 +95,11 @@
           />
         </div>
         <div class="info-section5-list">
-          <h1>3. Order</h1>
+          <h1>{{ $t("main.order") }}</h1>
           <ul>
-            <li>✓ Use drag and drop to create a bouquet.</li>
-            <li>✓ Create Payment.</li>
-            <li>✓ Get a check in the email</li>
+            <li>{{ $t("main.infosection10") }}</li>
+            <li>{{ $t("main.infosection11") }}</li>
+            <li>{{ $t("main.infosection12") }}</li>
           </ul>
         </div>
       </div>
@@ -109,10 +115,10 @@
             style="margin-top: 30px"
             href="https://www.google.com/maps/place/%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F+%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D0%B8,+14,+%D0%A5%D0%B0%D1%80%D0%BA%D1%96%D0%B2,+%D0%A5%D0%B0%D1%80%D0%BA%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+61000/@50.0035819,36.236927,15.92z/data=!4m5!3m4!1s0x4127a0dd7f5b56d1:0x738b2b1325130e3!8m2!3d50.0031556!4d36.2393487"
           >
-            Address: {{ shop.address }}
+            {{ $t("main.address") }} {{ shop.address }}
           </h2>
           <h2 class="text-left" style="margin-top: 30px">
-            Phone: {{ shop.phone }}
+            {{ $t("main.phone") }} {{ shop.phone }}
           </h2>
         </div>
         <div

@@ -1,9 +1,9 @@
 <template>
   <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
-    <h2 class="mx-auto">Edit flower</h2>
+    <h2 class="mx-auto">{{ $t("tables.editflower") }}</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Name</label>
+        <label for="">{{ $t("tables.name") }}</label>
         <MyInput
           type="text"
           class="form-control"
@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Color</label>
+        <label for="">{{ $t("tables.color") }}</label>
         <MyInput
           type="text"
           class="form-control"
@@ -29,7 +29,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Price</label>
+        <label for="">{{ $t("tables.Price") }}</label>
         <MyInput
           type="number"
           class="form-control"
@@ -42,7 +42,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Amount</label>
+        <label for="">{{ $t("tables.Amount") }}</label>
         <MyInput
           type="amount"
           class="form-control"
@@ -55,7 +55,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">File</label>
+        <label for="">{{ $t("tables.img") }}</label>
         <MyInput
           type="file"
           class="form-control"
@@ -68,7 +68,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <MyButton @click="submit" type="submit" class="btn">
-        Save changes
+        {{ $t("tables.btnsave") }}
       </MyButton>
     </div>
   </form>

@@ -1,9 +1,9 @@
 <template>
   <form class="container mx-auto" style="margin-bottom: 39px" @submit.prevent>
-    <h2 class="mx-auto">Edit profile</h2>
+    <h2 class="mx-auto">{{ $t("signup.editprofile") }}</h2>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">First name</label>
+        <label for="">{{ $t("signup.firstname") }}</label>
         <MyInput
           type="firstname"
           class="form-control"
@@ -16,7 +16,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Last name</label>
+        <label for="">{{ $t("signup.lastname") }}</label>
         <MyInput
           type="lastname"
           class="form-control"
@@ -42,7 +42,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Address</label>
+        <label for="">{{ $t("signup.address") }}</label>
         <MyInput
           type="address"
           class="form-control"
@@ -55,7 +55,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Phone</label>
+        <label for="">{{ $t("signup.phone") }}</label>
         <MyInput
           type="phone"
           class="form-control"
@@ -68,7 +68,7 @@
     </div>
     <div class="d-flex justify-content-center">
       <div class="form-group w-100 d-flex justify-content-between">
-        <label for="">Password</label>
+        <label for="">{{ $t("signup.password") }}</label>
         <MyInput
           type="password"
           class="form-control"
@@ -86,7 +86,7 @@
         class="btn"
         style="margin-top: 20px"
       >
-        Save changes
+        {{ $t("signup.btnsave") }}
       </MyButton>
     </div>
   </form>
