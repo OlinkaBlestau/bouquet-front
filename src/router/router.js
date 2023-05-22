@@ -86,7 +86,7 @@ const routes = [
   {
     path: "/create-bouquet",
     component: CreateBouquet,
-    beforeEnter: (to, from, next) => {
+    /*beforeEnter: (to, from, next) => {
       if (
         store.getters["isAuth"] === false ||
         store.getters["getRole"] === "admin"
@@ -96,7 +96,7 @@ const routes = [
         });
       }
       next();
-    },
+    },*/
   },
   {
     path: "/contact",

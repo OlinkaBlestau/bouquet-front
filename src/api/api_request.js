@@ -42,3 +42,8 @@ export const getDecor = (id) => axios.get(`${BASE_PATH_API}decors/${id}`);
 export const deleteDecor = (id) => axios.delete(`${BASE_PATH_API}decors/${id}`);
 export const deleteFlower = (id) =>
   axios.delete(`${BASE_PATH_API}flowers/${id}`);
+
+export const createBouquet = (data) =>
+  axios.post(`${BASE_PATH_API}bouquets`, data);
+
+export const getBouquet = (id) => axios.get(`${BASE_PATH_API}bouquets/${id}`);
