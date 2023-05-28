@@ -55,7 +55,7 @@ h2 {
   width: 15%;
   padding: 10px 5px;
   font-size: 1.2vw;
-  margin-top: 20px;
+  margin: 20px;
 }
 
 .btn-add:hover {

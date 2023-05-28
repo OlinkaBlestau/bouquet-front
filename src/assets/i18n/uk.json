@@ -59,7 +59,21 @@
     "viewprofile": "Перегляд профілю",
     "btnedit": "Редагувати",
     "editprofile": "Редагувати профіль",
-    "btnsave": "Зберегти зміни"
+    "btnsave": "Зберегти зміни",
+    "erorrphonetitle": "Некоректний номер телефону.",
+    "erorrphonetext": "Будь ласка, введіть коректний номер телефону.",
+    "erorrnametitle": "Некоректне ім'я.",
+    "erorrnametext": "Будь ласка, введіть коректне ім'я без цифр/символів/пробілів.",
+    "erorrsurnametitle": "Некоректне прізвище",
+    "erorrsurnametext": "Будь ласка, введіть коректне прізвище без цифр/символів/пробілів.",
+    "erorrpasswordtitle": "Некоректний пароль",
+    "erorrpasswordtext": "Будь ласка, введіть пароль який складається мінімум з 6 символів.",
+    "erorremailtitle": "Некоректний email",
+    "erorremailtext": "Будь ласка, введіть email за прикладом: example@gmail.com.",
+    "successtitle": "Успіх",
+    "successtext": "Реєстрація пройшла успішно.",
+    "erorrtitle": "Щось пішло не так",
+    "erorretext": "Будь ласка, перевірте правильність написання даних"
   },
   "shop": {
     "viewshop": "Перегляд магазину",
@@ -101,7 +115,35 @@
     "btnsave": "Зберегти",
     "btndelete": "Видалити",
     "btnclear":"Очистити",
-    "btnmakeorder":"Замовити"
+    "btnmakeorder":"Замовити",
+    "decors":"Декор",
+    "flowers": "Квіти",
+    "titleno": "Створені букети відсутні",
+
+    "titleerorrname": "Помилка назви",
+    "texterorrname": "Будь ласка, введіть назву україською або англійською",
+
+    "titleerorcolor": "Помилка кольору",
+    "texterorrcolor": "Будь ласка, введіть колір україською або англійською",
+
+    "titleerorrprice": "Помилка ціни",
+    "texterorrprice": "Будь ласка, введіть ціну більше 0",
+
+    "titleerorrprice0": "Помилка ціни",
+    "texterorrprice0": "Будь ласка, введіть ціну менше 500",
+
+    "titleerorramount": "Помилка кількості",
+    "texterorramount": "Будь ласка, перевірте щоб кількість була цілим числом",
+
+    "titleerorramount0": "Помилка кількості",
+    "texterorramount0": "Будь ласка, перевірте щоб кількість була більше 0",
+
+    "titleerorramount500": "Помилка кількості",
+    "texterorramount500": "Будь ласка, перевірте щоб кількість була менше 500",
+
+    "titleerorrfile": "Помилка файлу",
+    "texterorrfile": "Будь ласка, завантажте фото"
+
   },
   "orders":{
     "order": "Замовлення",

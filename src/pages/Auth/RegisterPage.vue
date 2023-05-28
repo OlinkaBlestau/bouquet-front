@@ -63,6 +63,7 @@
           v-model="phone"
           style="width: 70%"
           required
+          :value="phone"
         />
       </div>
     </div>
@@ -92,6 +93,7 @@
 
 <script>
 import { registration } from "@/api/api_request";
+import Swal from "sweetalert2";
 export default {
   name: "RegisterPage",
   data() {
@@ -101,11 +103,146 @@ export default {
       firstname: "",
       lastname: "",
       address: "",
-      phone: "",
+      phone: "+380",
     };
   },
+  // methods: {
+  //   submit() {
+  //     registration({
+  //       first_name: this.firstname,
+  //       last_name: this.lastname,
+  //       email: this.email,
+  //       address: this.address,
+  //       phone: this.phone,
+  //       password: this.password,
+  //     })
+  //       .then(() => {
+  //         this.$swal({
+  //           icon: "success",
+  //           color: "#000",
+  //           timer: 4000,
+  //           timerProgressBar: true,
+  //           showClass: {
+  //             popup: "animate__animated animate__fadeInDown",
+  //           },
+  //           hideClass: {
+  //             popup: "animate__animated animate__fadeOutUp",
+  //           },
+  //         });
+  //         this.$router.push("/login");
+  //       })
+  //       .catch(() => {
+  //         this.$swal({
+  //           icon: "error",
+  //           color: "#000",
+  //           title: this.$t("something_went_wrong.title"),
+  //           text: this.$t("something_went_wrong.text"),
+  //           timer: 4000,
+  //           showClass: {
+  //             popup: "animate__animated animate__fadeInDown",
+  //           },
+  //           hideClass: {
+  //             popup: "animate__animated animate__fadeOutUp",
+  //           },
+  //           timerProgressBar: true,
+  //         });
+  //       });
+  //   },
+  // },
   methods: {
     submit() {
+      if (!this.isValidPhone()) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: this.$t("signup.erorrphonetitle"),
+          text: this.$t("signup.erorrphonetext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
+      // Проверка имени
+      if (!this.isValidName(this.firstname)) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: this.$t("signup.erorrnametitle"),
+          text: this.$t("signup.erorrnametext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
+      // Проверка фамилии
+      if (!this.isValidName(this.lastname)) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: this.$t("signup.erorrsurnametitle"),
+          text: this.$t("signup.erorrsurnametext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
+      if (!this.isValidPassword()) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: this.$t("signup.erorrpasswordtitle"),
+          text: this.$t("signup.erorrpasswordtext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
+      if (!this.isValidEmail(this.email)) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: this.$t("signup.erorremailtitle"),
+          text: this.$t("signup.erorremailtext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
       registration({
         first_name: this.firstname,
         last_name: this.lastname,
@@ -115,26 +252,28 @@ export default {
         password: this.password,
       })
         .then(() => {
-          this.$swal({
+          Swal.fire({
             icon: "success",
             color: "#000",
+            title: this.$t("signup.successtitle"),
+            text: this.$t("signup.successtext"),
             timer: 4000,
-            timerProgressBar: true,
             showClass: {
               popup: "animate__animated animate__fadeInDown",
             },
             hideClass: {
               popup: "animate__animated animate__fadeOutUp",
             },
+            timerProgressBar: true,
           });
           this.$router.push("/login");
         })
         .catch(() => {
-          this.$swal({
+          Swal.fire({
             icon: "error",
             color: "#000",
-            title: this.$t("something_went_wrong.title"),
-            text: this.$t("something_went_wrong.text"),
+            title: this.$t("signup.erorrtitle"),
+            text: this.$t("signup.erorretext"),
             timer: 4000,
             showClass: {
               popup: "animate__animated animate__fadeInDown",
@@ -145,6 +284,23 @@ export default {
             timerProgressBar: true,
           });
         });
+    },
+    isValidPhone() {
+      const phoneRegex = /^\+380\d{9}$/;
+      return phoneRegex.test(this.phone);
+    },
+    isValidName(value) {
+      const nameRegex = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/;
+      return nameRegex.test(value);
+    },
+    isValidPassword() {
+      const minLength = 6;
+      return this.password.length >= minLength;
+    },
+
+    isValidEmail(email) {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(email);
     },
   },
   mounted() {

@@ -37,13 +37,18 @@ export const updateDecor = (id, data) =>
   axios.put(`${BASE_PATH_API}decors/${id}`, data);
 export const updateFlower = (id, data) =>
   axios.put(`${BASE_PATH_API}flowers/${id}`, data);
+export const updateBouquet = (id, data) =>
+  axios.put(`${BASE_PATH_API}bouquets/${id}`, data);
 export const getFlower = (id) => axios.get(`${BASE_PATH_API}flowers/${id}`);
 export const getDecor = (id) => axios.get(`${BASE_PATH_API}decors/${id}`);
 export const deleteDecor = (id) => axios.delete(`${BASE_PATH_API}decors/${id}`);
 export const deleteFlower = (id) =>
   axios.delete(`${BASE_PATH_API}flowers/${id}`);
 
+export const deleteBouquet = (id) =>
+  axios.delete(`${BASE_PATH_API}bouquets/${id}`);
 export const createBouquet = (data) =>
   axios.post(`${BASE_PATH_API}bouquets`, data);
 
 export const getBouquet = (id) => axios.get(`${BASE_PATH_API}bouquets/${id}`);
+export const getBouquets = () => axios.get(`${BASE_PATH_API}bouquets`);

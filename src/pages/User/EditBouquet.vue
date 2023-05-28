@@ -104,10 +104,10 @@
             style="min-width: 8%; object-fit: contain; height: auto"
             :onResize="handleResizeAction"
             :beforeActive="() => handleActive(element.id)"
+            :active="index === selectedElementIndex"
             :onRotate="handleRotateAction"
             :onDrag="handleDragAction"
             :value="element.transform"
-            :active="index === selectedElementIndex"
           >
             <div>
               <img
@@ -130,31 +130,33 @@
     </div>
   </div>
 </template>
+
 <script>
 import GridComponent from "@/components/DnD/GridComponent.vue";
 import DDR from "yoyoo-ddr-vue3";
 import "yoyoo-ddr-vue3/dist/yoyoo-ddr-vue3.css";
 import {
-  createBouquet,
   getBouquet,
   getDecors,
   getFlowers,
+  updateBouquet,
 } from "@/api/api_request";
 import { mapGetters } from "vuex";
-
 export default {
-  name: "CreateBouquet",
+  name: "EditBouquet",
   components: {
     GridComponent,
     DDR,
   },
   data() {
     return {
+      name: "",
       gridElements: [],
       decors: [],
       flowers: [],
       isDecor: true,
       selectedElementIndex: -1, // Индекс выбранного элемента
+      hasBouquets: true, // По умолчанию считаем, что у пользователя есть букеты
     };
   },
   computed: {
@@ -191,7 +193,8 @@ export default {
         };
       });
     });
-    getBouquet(1).then((response) => {
+    getBouquet(this.$route.params.id).then((response) => {
+      this.name = response.data.bouquet.name;
       this.gridElements = JSON.parse(response.data.bouquet.configuration) ?? [];
     });
   },
@@ -232,11 +235,11 @@ export default {
     handleRotateAction(event, transform) {
       this.defaultHandlerAction(transform);
     },
-    // handleActive(id) {
-    //   this.selectedElementIndex = this.gridElements.findIndex(
-    //     (element) => element.id === id
-    //   );
-    // },
+    handleActive(id) {
+      this.selectedElementIndex = this.gridElements.findIndex(
+        (element) => element.id === id
+      );
+    },
     defaultHandlerAction(transform) {
       if (transform !== undefined) {
         let draggableElement = this.gridElements.filter((element) => {
@@ -253,8 +256,8 @@ export default {
         };
       }
     },
-
     deleteElement() {
+      console.log(this.selectedElementIndex);
       if (this.selectedElementIndex === -1) {
         this.selectedElementIndex = this.gridElements.length - 1;
       }
@@ -269,23 +272,13 @@ export default {
       }
     },
     saveBouquet() {
-      this.$swal({
-        title: "Введите название",
-        input: "text",
-        showCancelButton: true,
-        confirmButtonText: "Submit",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const inputValue = result.value;
-          createBouquet({
-            user_id: this.getUserId,
-            name: inputValue,
-            total_price: this.getTotalPrice,
-            configuration: this.gridElements,
-          }).then(() => {
-            this.$router.push("/view-bouquets");
-          });
-        }
+      updateBouquet(this.$route.params.id, {
+        user_id: this.getUserId,
+        name: this.name,
+        total_price: this.getTotalPrice,
+        configuration: this.gridElements,
+      }).then(() => {
+        this.$router.push("/view-bouquets");
       });
     },
   },

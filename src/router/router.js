@@ -18,6 +18,7 @@ import ContactsPage from "@/pages/User/ContactsPage.vue";
 import BouquetsPage from "@/pages/User/BouquetsPage.vue";
 import ViewOrdersPage from "@/pages/Admin/ViewOrdersPage.vue";
 import CurrentOrderPage from "@/pages/Admin/CurrentOrderPage.vue";
+import EditBouquet from "@/pages/User/EditBouquet.vue";
 
 const routes = [
   {
@@ -178,6 +179,22 @@ const routes = [
   {
     path: "/view-bouquets",
     component: BouquetsPage,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "admin"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+
+  {
+    path: "/edit-bouquets/:id",
+    component: EditBouquet,
     beforeEnter: (to, from, next) => {
       if (
         store.getters["isAuth"] === false ||

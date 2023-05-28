@@ -60,7 +60,28 @@
     "viewprofile": "View profile",
     "btnedit": "Edit profile",
     "editprofile": "Edit profile",
-    "btnsave": "Save changes"
+    "btnsave": "Save changes",
+    "erorrphonetitle": "Incorrect phone number.",
+    "erorrphonetext": "Please enter a valid phone number.",
+
+    "erorrnametitle": "Invalid name.",
+    "erorrnametext": "Please enter a valid name without numbers/characters/spaces.",
+
+    "erorrsurnametitle": "Incorrect last name",
+    "erorrsurnametext": "Please enter a valid last name without numbers/symbols/spaces.",
+
+    "erorrpasswordtitle": "Incorrect password",
+    "erorrpasswordtext": "Please enter a password consisting of at least 6 characters.",
+
+    "erorremailtitle": "Incorrect email",
+    "erorremailtext": "Please enter the email as an example: example@gmail.com.",
+
+    "successtitle": "Success",
+    "successtext": "Registration was successful.",
+
+    "erorrtitle": "Something went wrong",
+    "erorretext": "Please check the correct spelling of the data"
+
   },
   "shop":{
     "viewshop": "View shop",
@@ -101,7 +122,34 @@
     "btnsave": "Save",
     "btndelete": "Delete",
     "btnclear":"Clear",
-    "btnmakeorder":"Make an order"
+    "btnmakeorder":"Make an order",
+    "decors":"Decors",
+    "flowers": "Flowers",
+    "titleno": "There are no created bouquets",
+
+    "titleerorrname": "Name error",
+    "texterorrname": "Please enter the name in Ukrainian or English",
+
+    "titleerorcolor": "Color error",
+    "texterorrcolor": "Please enter the color in Ukrainian or English",
+
+    "titleerorrprice": "Price error",
+    "texterorrprice": "Please enter a price greater than 0",
+
+    "titleerorrprice0": "Price error",
+    "texterorrprice0": "Please enter a price less than 500",
+
+    "titleerorramount": "Quantity error",
+    "texterorramount": "Please check that the quantity is an integer",
+
+    "titleerorramount0": "Quantity error",
+    "texterorramount0": "Please check that the quantity is greater than 0",
+
+    "titleerorramount500": "Помилка кількості",
+    "texterorramount500": "Будь ласка, перевірте щоб кількість була менше 500",
+
+    "titleerorrfile": "File error",
+    "texterorrfile": "Будь ласка, завантажте фото"
   },
   "orders":{
     "order": "Order",

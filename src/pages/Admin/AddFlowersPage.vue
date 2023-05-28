@@ -77,6 +77,7 @@
 
 <script>
 import { createFlower, imageFlowerUpload } from "@/api/api_request";
+import Swal from "sweetalert2";
 
 export default {
   name: "AddFlowersPage",
@@ -100,7 +101,177 @@ export default {
     choosePhoto(event) {
       this.img_path = event.target.files[0];
     },
+    validateName() {
+      const namePattern = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/;
+      if (!namePattern.test(this.name)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrname"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrname"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return false;
+      }
+      return true;
+    },
+    validateColor() {
+      const namePattern = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/;
+      if (!namePattern.test(this.color)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorcolor"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrcolor"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return false;
+      }
+      return true;
+    },
+    validatePrice() {
+      const priceValue = parseFloat(this.price);
+      if (priceValue <= 0) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrprice"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrprice"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return false;
+      }
+      if (priceValue > 500) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrprice0"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrprice0"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return false;
+      }
+
+      return true;
+    },
+
+    validateAmount() {
+      const amountPattern = /^\d+$/;
+      if (!amountPattern.test(this.storage_flowers_amount)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorramount"),
+          text: this.$t("bouquet.texterorramount"),
+          timer: 4000,
+          color: "#000",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return false;
+      }
+      const amountValue = parseInt(this.storage_flowers_amount);
+      if (amountValue <= 0) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorramount0"),
+          color: "#000",
+          text: this.$t("bouquet.texterorramount0"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return false;
+      }
+      if (amountValue > 500) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorramount500"),
+          color: "#000",
+          text: this.$t("bouquet.texterorramount500"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return false;
+      }
+
+      return true;
+    },
+
     submit() {
+      if (!this.validateName()) {
+        return;
+      }
+      if (!this.validateColor()) {
+        return;
+      }
+      if (!this.validatePrice()) {
+        return;
+      }
+      if (!this.validateAmount()) {
+        return;
+      }
+      if (!this.img_path) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrfile"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrfile"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
       createFlower({
         name: this.name,
         color: this.color,
@@ -129,8 +300,8 @@ export default {
           this.$swal({
             icon: "error",
             color: "#000",
-            title: this.$t("something_went_wrong.title"),
-            text: this.$t("something_went_wrong.text"),
+            title: this.$t("signup.erorrtitle"),
+            text: this.$t("signup.erorretext"),
             timer: 4000,
             showClass: {
               popup: "animate__animated animate__fadeInDown",
