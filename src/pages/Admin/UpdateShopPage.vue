@@ -94,6 +94,7 @@
 
 <script>
 import { getShop, updateShop } from "@/api/api_request";
+import Swal from "sweetalert2";
 
 export default {
   name: "UpdateShopPage",
@@ -103,7 +104,49 @@ export default {
     };
   },
   methods: {
+    validateEmail(email) {
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/; // Регулярное выражение для проверки email
+      return emailRegex.test(email);
+    },
+    validatePhone(phone) {
+      const phoneRegex = /^\+380\d{9}$/; // Регулярное выражение для проверки украинского номера телефона
+      return phoneRegex.test(phone);
+    },
     submit() {
+      if (!this.validateEmail(this.shop.email)) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: "емаил",
+          text: "signup.erorremailtext",
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если email невалиден
+      }
+      if (!this.validatePhone(this.shop.phone)) {
+        Swal.fire({
+          icon: "error",
+          title: "sтелеф",
+          color: "#000",
+          text: "signup.erorrphonetext",
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если номер телефона невалиден
+      }
       updateShop(this.shop.id, {
         id: this.shop.id,
         email: this.shop.email,
@@ -132,8 +175,8 @@ export default {
           this.$swal({
             icon: "error",
             color: "#000",
-            title: this.$t("something_went_wrong.title"),
-            text: this.$t("something_went_wrong.text"),
+            title: this.$t("signup.erorrtitle"),
+            text: this.$t("signup.erorretext"),
             timer: 4000,
             showClass: {
               popup: "animate__animated animate__fadeInDown",

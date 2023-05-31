@@ -94,7 +94,7 @@
 
 <script>
 import { getUser, updateUser } from "@/api/api_request";
-
+import Swal from "sweetalert2";
 export default {
   name: "UpdateProfile",
   data() {
@@ -103,7 +103,73 @@ export default {
     };
   },
   methods: {
+    validateName(name) {
+      const nameRegex = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/; // Регулярное выражение для проверки имени
+      return nameRegex.test(name);
+    },
+    validateEmail(email) {
+      const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/; // Регулярное выражение для проверки email
+      return emailRegex.test(email);
+    },
+    validatePhone(phone) {
+      const phoneRegex = /^\+380\d{9}$/; // Регулярное выражение для проверки украинского номера телефона
+      return phoneRegex.test(phone);
+    },
     submit() {
+      if (
+        !this.validateName(this.user.first_name) ||
+        !this.validateName(this.user.last_name)
+      ) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: this.$t("signup.erorrnametitle"),
+          text: this.$t("signup.erorrnametext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если имя невалидно
+      }
+      if (!this.validateEmail(this.user.email)) {
+        Swal.fire({
+          icon: "error",
+          color: "#000",
+          title: this.$t("signup.erorremailtitle"),
+          text: this.$t("signup.erorremailtext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если email невалиден
+      }
+      if (!this.validatePhone(this.user.phone)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("signup.erorrphonetitle"),
+          color: "#000",
+          text: this.$t("signup.erorrphonetext"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если номер телефона невалиден
+      }
       updateUser(this.user.id, {
         id: this.user.id,
         first_name: this.user.first_name,
@@ -132,8 +198,8 @@ export default {
           this.$swal({
             icon: "error",
             color: "#000",
-            title: this.$t("something_went_wrong.title"),
-            text: this.$t("something_went_wrong.text"),
+            title: this.$t("signup.erorrtitle"),
+            text: this.$t("signup.erorretext"),
             timer: 4000,
             showClass: {
               popup: "animate__animated animate__fadeInDown",

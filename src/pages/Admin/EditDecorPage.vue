@@ -76,6 +76,7 @@
 
 <script>
 import { getDecor, imageDecorUpload, updateDecor } from "@/api/api_request";
+import Swal from "sweetalert2";
 
 export default {
   name: "EditDecorPage",
@@ -86,11 +87,97 @@ export default {
     };
   },
   methods: {
+    validateName(name) {
+      const nameRegex = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/; // Регулярное выражение для проверки имени
+      return nameRegex.test(name);
+    },
+    validateColor(color) {
+      const nameRegex = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/; // Регулярное выражение для проверки имени
+      return nameRegex.test(color);
+    },
+    validatePrice(price) {
+      // Проверка цены, чтобы она не была меньше 0 и не больше 500
+      return price > 0 && price < 500;
+    },
+    validateAmount(amount) {
+      // Проверка цены, чтобы она не была меньше 0 и не больше 500
+      return amount > 0 && amount < 500;
+    },
     choosePhoto(event) {
       this.decor.img_path = event.target.files[0];
       this.isNewPhoto = true;
     },
     submit() {
+      if (!this.validateName(this.decor.name)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrname"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrname"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если имя невалидно
+      }
+      if (!this.validateColor(this.decor.color)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorcolor"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrcolor"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если имя невалидно
+      }
+      if (!this.validatePrice(this.decor.price)) {
+        // Проверка цены
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrprice"),
+          color: "#000",
+          text: this.$t("bouquet.texterrorpricebetween"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+      if (!this.validateAmount(this.decor.storage_decors_amount)) {
+        // Проверка цены
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorramount"),
+          text: this.$t("bouquet.texterrorpamounttween"),
+          timer: 4000,
+          color: "#000",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
       updateDecor(this.decor.id, {
         name: this.decor.name,
         color: this.decor.color,

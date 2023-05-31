@@ -145,11 +145,15 @@
     "titleerorramount0": "Quantity error",
     "texterorramount0": "Please check that the quantity is greater than 0",
 
-    "titleerorramount500": "Помилка кількості",
-    "texterorramount500": "Будь ласка, перевірте щоб кількість була менше 500",
+    "titleerorramount500": "Quantity error",
+    "texterorramount500": "Please check that the quantity is less than 500",
 
     "titleerorrfile": "File error",
-    "texterorrfile": "Будь ласка, завантажте фото"
+    "texterorrfile": "Please upload a photo",
+
+    "texterrorpricebetween": "Please enter a price greater than 0 and less than UAH 500.",
+
+    "texterrorpamounttween": "Please enter a quantity greater than 0 and less than 500."
   },
   "orders":{
     "order": "Order",

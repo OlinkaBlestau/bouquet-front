@@ -31,7 +31,7 @@
       <div class="form-group w-100 d-flex justify-content-between">
         <label for="">{{ $t("tables.Price") }}</label>
         <MyInput
-          type="number"
+          type="text"
           class="form-control"
           id="price"
           v-model="flower.price"
@@ -76,6 +76,7 @@
 
 <script>
 import { getFlower, imageFlowerUpload, updateFlower } from "@/api/api_request";
+import Swal from "sweetalert2";
 
 export default {
   name: "EditFlowersPage",
@@ -86,11 +87,97 @@ export default {
     };
   },
   methods: {
+    validateName(name) {
+      const nameRegex = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/; // Регулярное выражение для проверки имени
+      return nameRegex.test(name);
+    },
+    validateColor(color) {
+      const nameRegex = /^[А-ЩЬЮЯҐЄІЇа-щьюяґєіїA-Za-z]+$/; // Регулярное выражение для проверки имени
+      return nameRegex.test(color);
+    },
+    validatePrice(price) {
+      // Проверка цены, чтобы она не была меньше 0 и не больше 500
+      return price > 0 && price < 500;
+    },
+    validateAmount(amount) {
+      // Проверка цены, чтобы она не была меньше 0 и не больше 500
+      return amount > 0 && amount < 500;
+    },
     choosePhoto(event) {
       this.flower.img_path = event.target.files[0];
       this.isNewPhoto = true;
     },
     submit() {
+      if (!this.validateName(this.flower.name)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrname"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrname"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если имя невалидно
+      }
+      if (!this.validateColor(this.flower.color)) {
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorcolor"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrcolor"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return; // Останавливаем отправку данных, если имя невалидно
+      }
+      if (!this.validatePrice(this.flower.price)) {
+        // Проверка цены
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorrprice"),
+          color: "#000",
+          text: this.$t("bouquet.texterorrprice"),
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+      if (!this.validateAmount(this.flower.storage_flowers_amount)) {
+        // Проверка цены
+        Swal.fire({
+          icon: "error",
+          title: this.$t("bouquet.titleerorramount"),
+          text: this.$t("bouquet.texterorramount"),
+          timer: 4000,
+          color: "#000",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
       updateFlower(this.flower.id, {
         name: this.flower.name,
         color: this.flower.color,
@@ -121,8 +208,8 @@ export default {
           this.$swal({
             icon: "error",
             color: "#000",
-            title: this.$t("something_went_wrong.title"),
-            text: this.$t("something_went_wrong.text"),
+            title: this.$t("signup.erorrtitle"),
+            text: this.$t("signup.erorretext"),
             timer: 4000,
             showClass: {
               popup: "animate__animated animate__fadeInDown",
