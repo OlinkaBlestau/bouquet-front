@@ -52,4 +52,13 @@ export const createBouquet = (data) =>
   axios.post(`${BASE_PATH_API}bouquets`, data);
 
 export const getBouquet = (id) => axios.get(`${BASE_PATH_API}bouquets/${id}`);
+
+export const imageBouquetUpload = (id, data) =>
+  axios.post(`${BASE_PATH_API}image/upload/bouquet/${id}`, data);
 export const getBouquets = () => axios.get(`${BASE_PATH_API}bouquets`);
+
+export const getStripeIntent = (id) =>
+  axios.get(`${BASE_PATH_API}stripe/intent/${id}`);
+
+export const purchase = (data) =>
+  axios.post(`${BASE_PATH_API}stripe/purchase/`, data);

@@ -292,7 +292,7 @@ export default {
               popup: "animate__animated animate__fadeOutUp",
             },
           });
-          window.location.href = "/view-decors";
+          /*window.location.href = "/view-decors";*/
         })
         .catch(() => {
           this.$swal({

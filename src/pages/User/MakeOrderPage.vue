@@ -44,7 +44,9 @@
         </p>
       </div>
     </div>
-    <button class="btn pay">{{ $t("orders.pay") }}</button>
+    <button class="btn pay" @click="this.$router.push(`/payment/`)">
+      {{ $t("orders.pay") }}
+    </button>
     <button class="btn cancel">{{ $t("orders.cancel") }}</button>
   </div>
 </template>

@@ -21,6 +21,7 @@ import CurrentOrderPage from "@/pages/Admin/CurrentOrderPage.vue";
 import EditBouquet from "@/pages/User/EditBouquet.vue";
 import StatisticsPage from "@/pages/Admin/StatisticsPage.vue";
 import MakeOrderPage from "@/pages/User/MakeOrderPage.vue";
+import PaymentPage from "@/pages/User/PaymentPage.vue";
 
 const routes = [
   {
@@ -299,6 +300,10 @@ const routes = [
       }
       next();
     },
+  },
+  {
+    path: "/payment/",
+    component: PaymentPage,
   },
   {
     path: "/",
