@@ -18,7 +18,7 @@
             >
               <p>{{ bouquet.name }}</p>
               <p>{{ bouquet.color }}</p>
-              <p>3 {{ $t("orders.units") }}</p>
+              <p>1 {{ $t("orders.units") }}</p>
               <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
             </div>
             <hr />
@@ -29,7 +29,7 @@
             >
               <p>{{ bouquet.name }}</p>
               <p>{{ bouquet.color }}</p>
-              <p>3 {{ $t("orders.units") }}</p>
+              <p>1 {{ $t("orders.units") }}</p>
               <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
             </div>
           </div>
