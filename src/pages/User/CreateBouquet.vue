@@ -101,13 +101,14 @@
       <div>
         <div v-for="(element, index) in gridElements" :key="index">
           <DDR
+            :key="element.draggable_id"
             style="min-width: 8%; object-fit: contain; height: auto"
             :onResize="handleResizeAction"
-            :beforeActive="() => handleActive(element.id)"
+            :beforeActive="handleActive(element.draggable_id)"
             :onRotate="handleRotateAction"
             :onDrag="handleDragAction"
             :value="element.transform"
-            :active="index === selectedElementIndex"
+            :active="element.transform.active"
           >
             <div>
               <img
@@ -253,21 +254,35 @@ export default {
       });
     },
     addNewElementToGrid(imageId, elementId, type, price) {
+      const index =
+        this.gridElements.length === 0
+          ? 0
+          : this.gridElements.lastIndexOf(
+              this.gridElements[this.gridElements.length - 1]
+            ) + 1;
+
       this.gridElements.push({
         ...{
           transform: {
             ...this.getDefaultAttributesForElement,
-            id: elementId,
+            draggable_id: index,
+            active: true,
           },
         },
         ...{
           image_id: imageId,
           id: elementId,
+          draggable_id: index,
           type: type,
           price: Number.parseInt(price),
         },
       });
-      this.selectedElementIndex = this.gridElements.length - 1;
+
+      this.gridElements.forEach((element) => {
+        if (element.draggable_id !== index) {
+          element.transform.active = false;
+        }
+      });
     },
     getImgUrl(imagePath) {
       return `http://localhost/storage/${imagePath}`;
@@ -281,23 +296,26 @@ export default {
     handleRotateAction(event, transform) {
       this.defaultHandlerAction(transform);
     },
-    // handleActive(id) {
-    //   this.selectedElementIndex = this.gridElements.findIndex(
-    //     (element) => element.id === id
-    //   );
-    // },
+    handleActive(id) {
+      this.gridElements.forEach((element) => {
+        element.transform.active = element.draggable_id === id;
+      });
+    },
     defaultHandlerAction(transform) {
       if (transform !== undefined) {
         let draggableElement = this.gridElements.filter((element) => {
-          return Number.parseInt(element.id) === Number.parseInt(transform.id);
+          return (
+            Number.parseInt(element.draggable_id) ===
+            Number.parseInt(transform.draggable_id)
+          );
         });
         let index = this.gridElements.findIndex((element) => {
-          return element.id === draggableElement[0].id;
+          return element.draggable_id === draggableElement[0].draggable_id;
         });
         this.gridElements[index].transform = {
           ...transform,
           ...{
-            id: draggableElement[0].id,
+            id: draggableElement[0].draggable_id,
           },
         };
       }
