@@ -331,6 +331,8 @@ export default {
             name: inputValue,
             total_price: this.getTotalPrice,
             configuration: this.gridElements,
+            flowers: this.getFlowersIdsFromGrid,
+            decors: this.getDecorsIdsFromGrid,
           }).then(() => {
             this.$router.push("/view-bouquets");
           });

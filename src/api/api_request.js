@@ -17,6 +17,7 @@ export const updateUser = (id, data) =>
   axios.put(`${BASE_PATH_API}users/${id}`, data);
 
 export const getShop = (id) => axios.get(`${BASE_PATH_API}shops/${id}`);
+export const getShops = () => axios.get(`${BASE_PATH_API}shops`);
 export const updateShop = (id, data) =>
   axios.put(`${BASE_PATH_API}shops/${id}`, data);
 

@@ -11,32 +11,26 @@
             >
               {{ $t("orders.composition") }}
             </h1>
-            <div class="info-block d-flex justify-content-between">
-              <p>Троянда</p>
-              <p>Червона</p>
+            <div
+              v-for="bouquet in getBouquetsBasket?.flowers"
+              :key="bouquet"
+              class="info-block d-flex justify-content-between"
+            >
+              <p>{{ bouquet.name }}</p>
+              <p>{{ bouquet.color }}</p>
               <p>3 {{ $t("orders.units") }}</p>
-              <p>25 {{ $t("orders.uahunit") }}</p>
+              <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
             </div>
             <hr />
-            <div class="info-block d-flex justify-content-between">
-              <p>Троянда</p>
-              <p>Червона</p>
+            <div
+              v-for="bouquet in getBouquetsBasket?.decors"
+              :key="bouquet"
+              class="info-block d-flex justify-content-between"
+            >
+              <p>{{ bouquet.name }}</p>
+              <p>{{ bouquet.color }}</p>
               <p>3 {{ $t("orders.units") }}</p>
-              <p>25 {{ $t("orders.uahunit") }}</p>
-            </div>
-            <hr />
-            <div class="info-block d-flex justify-content-between">
-              <p>Троянда</p>
-              <p>Червона</p>
-              <p>3 {{ $t("orders.units") }}</p>
-              <p>25 {{ $t("orders.uahunit") }}</p>
-            </div>
-            <hr />
-            <div class="info-block d-flex justify-content-between">
-              <p>Троянда</p>
-              <p>Червона</p>
-              <p>3 {{ $t("orders.units") }}</p>
-              <p>25 {{ $t("orders.uahunit") }}</p>
+              <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
             </div>
           </div>
         </div>
@@ -46,7 +40,7 @@
           {{ $t("orders.topay") }}
         </p>
         <p style="top: 10px; position: relative; font-weight: bold">
-          800 {{ $t("orders.uah") }}
+          {{ getBouquetsBasket?.total_price }} {{ $t("orders.uah") }}
         </p>
       </div>
     </div>
@@ -56,6 +50,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import { getShops } from "@/api/api_request";
+
 export default {
   name: "MakeOrderPage",
   data() {
@@ -63,12 +60,20 @@ export default {
       order: [],
     };
   },
+  computed: {
+    ...mapGetters(["getBouquetsBasket"]),
+  },
   mounted() {
     document.body.style.background =
       "linear-gradient(to left, #F5B9FF, #B6CFD3)";
   },
   beforeUnmount() {
     document.body.style.backgroundColor = "";
+  },
+  beforeMount() {
+    getShops().then((response) =>
+      localStorage.setItem("shopId", response.data.shops.data[0].id)
+    );
   },
 };
 </script>

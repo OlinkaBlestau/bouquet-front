@@ -8,7 +8,7 @@ const store = createStore({
         : localStorage.getItem("accessToken"),
     role: localStorage.getItem("role"),
     userId: localStorage.getItem("userId"),
-    productItems: JSON.parse(localStorage.getItem("bouquets")) ?? [],
+    bouquets: JSON.parse(localStorage.getItem("bouquets")),
   },
   getters: {
     isAuth(state) {
