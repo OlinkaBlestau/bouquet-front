@@ -27,7 +27,7 @@
         <button
           title="Clear all components in the editing area"
           data-action="clear"
-          @click="makeOrder"
+          @click="$router.push(`/make-order`)"
         >
           {{ $t("bouquet.btnmakeorder") }}
         </button>
@@ -270,7 +270,7 @@ export default {
     },
     saveBouquet() {
       this.$swal({
-        title: "Введите название",
+        title: "Enter name of bouquet",
         input: "text",
         showCancelButton: true,
         confirmButtonText: "Submit",

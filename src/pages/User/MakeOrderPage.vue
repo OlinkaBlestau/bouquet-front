@@ -1,37 +1,7 @@
 <template>
   <div class="cont m-auto">
-    <h1>{{ $t("orders.order") }} №1</h1>
-    <div class="cont-info-order d-flex justify-content-between">
-      <div class="contacts-info">
-        <div class="contacts-info-item">
-          <h1
-            class="text-center"
-            style="position: relative; top: 10px; margin-bottom: 55px"
-          >
-            {{ $t("orders.profile") }}
-          </h1>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.firstname") }}</p>
-            <p>Rostislav</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.lastname") }}</p>
-            <p>Kaplenko</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>Email</p>
-            <p>rostislav@gmail.com</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.phone") }}</p>
-            <p>+380664581247</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.address") }}</p>
-            <p>Kharkiv, Mire 15-8</p>
-          </div>
-        </div>
-      </div>
+    <h1>{{ $t("orders.makeorder") }}</h1>
+    <div class="order-info d-flex justify-content-between">
       <div class="bouquet-consist">
         <div class="bouquet-info">
           <div class="bouquet-info-item">
@@ -71,20 +41,23 @@
           </div>
         </div>
       </div>
+      <div class="total-price d-flex justify-content-between">
+        <p style="top: 10px; position: relative; font-weight: bold">
+          {{ $t("orders.topay") }}
+        </p>
+        <p style="top: 10px; position: relative; font-weight: bold">
+          800 {{ $t("orders.uah") }}
+        </p>
+      </div>
     </div>
-    <div class="total-price d-flex justify-content-between">
-      <p style="top: 10px; position: relative; font-weight: bold">
-        {{ $t("orders.totalprice") }}
-      </p>
-      <p style="top: 10px; position: relative; font-weight: bold">
-        800 {{ $t("orders.uah") }}
-      </p>
-    </div>
+    <button class="btn pay">{{ $t("orders.pay") }}</button>
+    <button class="btn cancel">{{ $t("orders.cancel") }}</button>
   </div>
 </template>
+
 <script>
 export default {
-  name: "CurrentOrderPage",
+  name: "MakeOrderPage",
   data() {
     return {
       order: [],
@@ -111,11 +84,11 @@ export default {
   background-color: #ffffff;
   font-size: 1.2vw;
   font-family: "Comfortaa", cursive;
-  position: absolute;
   border-radius: 25px;
   padding: 20px;
-  right: 996px;
-  top: 600px;
+  top: 130px;
+  height: 90px;
+  position: relative;
   box-shadow: 0 5px 10px -2px gray;
   font-weight: bold;
 }
@@ -123,26 +96,45 @@ h1 {
   text-align: center;
   font-family: "Marmelad", sans-serif;
 }
-.contacts-info-item {
-  position: relative;
-  width: 170%;
-  font-size: 1.2vw;
-  background-color: #ffdede;
-  padding: 25px;
-  box-shadow: 0 5px 10px -2px gray;
-  top: 50px;
-  left: -128px;
-  border-radius: 25px;
+.pay {
+  background-color: #e1225d;
+  width: 200px;
+  height: 55px;
+  color: #fff;
+  font-size: 1.1vw;
+  border-radius: 10px;
+  position: absolute;
+  top: 320px;
+  right: 350px;
+}
+.cancel {
+  width: 200px;
+  height: 55px;
+  color: #000;
+  font-size: 1.1vw;
+  border-radius: 10px;
+  position: absolute;
+  top: 320px;
+  right: 50px;
+  background-color: transparent;
+  border: #000000 solid 1px;
+}
+.pay:hover {
+  background-color: #fff;
+  color: #000;
+}
+.cancel:hover {
+  background-color: #000;
+  color: #fff;
 }
 .bouquet-info-item {
   position: relative;
-  width: 200%;
+  width: 166%;
   font-size: 1.2vw;
   background-color: #ffdede;
   padding: 25px;
   box-shadow: 0 5px 10px -2px gray;
   top: 50px;
-  right: 415px;
   border-radius: 25px;
 }
 .contacts-info-item h1 {

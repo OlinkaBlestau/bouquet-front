@@ -19,6 +19,8 @@ import BouquetsPage from "@/pages/User/BouquetsPage.vue";
 import ViewOrdersPage from "@/pages/Admin/ViewOrdersPage.vue";
 import CurrentOrderPage from "@/pages/Admin/CurrentOrderPage.vue";
 import EditBouquet from "@/pages/User/EditBouquet.vue";
+import StatisticsPage from "@/pages/Admin/StatisticsPage.vue";
+import MakeOrderPage from "@/pages/User/MakeOrderPage.vue";
 
 const routes = [
   {
@@ -115,8 +117,38 @@ const routes = [
     },
   },
   {
+    path: "/make-order",
+    component: MakeOrderPage,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "admin"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+  {
     path: "/add-decor",
     component: AddDecorPage,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "user"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+  {
+    path: "/statistics",
+    component: StatisticsPage,
     beforeEnter: (to, from, next) => {
       if (
         store.getters["isAuth"] === false ||

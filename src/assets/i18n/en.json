@@ -14,7 +14,8 @@
     "orders": "Orders",
     "shopinfo": "Shop information",
     "profileinfo": "Profile information",
-    "exit": "Log out"
+    "exit": "Log out",
+    "statistics": "Statistics"
   },
   "main": {
     "maintitle1": "Create your",
@@ -166,6 +167,11 @@
     "totalprice": "Total price:",
     "units": "units.",
     "uahunit": "uah./unit",
-    "uah": "uah."
+    "uah": "uah.",
+
+    "makeorder": "Create an order",
+    "pay": "Pay",
+    "cancel": "Cancel",
+    "topay": "To pay:"
   }
 }

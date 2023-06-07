@@ -27,7 +27,7 @@
         <button
           title="Clear all components in the editing area"
           data-action="clear"
-          @click="makeOrder"
+          @click="$router.push(`/make-order`)"
         >
           {{ $t("bouquet.btnmakeorder") }}
         </button>

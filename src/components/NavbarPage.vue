@@ -113,6 +113,11 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item" v-if="isAuth && getRole == 'admin'">
+            <a class="nav-link" :href="`/statistics`">
+              {{ $t("navbar.statistics") }}
+            </a>
+          </li>
           <li class="nav-item" v-if="isAuth && getRole == 'user'">
             <a class="nav-link" :href="`/contact`">{{
               $t("navbar.myorders")
@@ -239,7 +244,7 @@ nav ul li a:focus {
 
 .navbar-nav .nav-item a {
   color: #3a0000;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 .dropdown-item {
   font-size: 22px;
