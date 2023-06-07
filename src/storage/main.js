@@ -8,6 +8,7 @@ const store = createStore({
         : localStorage.getItem("accessToken"),
     role: localStorage.getItem("role"),
     userId: localStorage.getItem("userId"),
+    productItems: JSON.parse(localStorage.getItem("bouquets")) ?? [],
   },
   getters: {
     isAuth(state) {
@@ -22,6 +23,9 @@ const store = createStore({
     getUserId(state) {
       return state.userId;
     },
+    getBouquetsBasket(state) {
+      return state.bouquets;
+    },
   },
   mutations: {
     setAccessToken(state, newAccessToken) {
@@ -32,6 +36,9 @@ const store = createStore({
     },
     setUserId(state, newUserId) {
       state.userId = newUserId;
+    },
+    setBouquetsBasket(state, newOne) {
+      state.bouquets = newOne;
     },
   },
   actions: {},

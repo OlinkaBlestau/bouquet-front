@@ -27,7 +27,7 @@
         <button
           title="Clear all components in the editing area"
           data-action="clear"
-          @click="$router.push(`/make-order`)"
+          @click="addToBasket()"
         >
           {{ $t("bouquet.btnmakeorder") }}
         </button>
@@ -140,7 +140,7 @@ import {
   getDecors,
   getFlowers,
 } from "@/api/api_request";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "CreateBouquet",
@@ -153,6 +153,7 @@ export default {
       gridElements: [],
       decors: [],
       flowers: [],
+      resultBouquet: [],
       isDecor: true,
       selectedElementIndex: -1, // Индекс выбранного элемента
     };
@@ -172,6 +173,16 @@ export default {
       return this.gridElements.reduce((accumulator, object) => {
         return accumulator + object.price;
       }, 0);
+    },
+    getFlowersIdsFromGrid() {
+      return this.gridElements
+        .filter((element) => element.type === "flower")
+        .map((element) => element.id);
+    },
+    getDecorsIdsFromGrid() {
+      return this.gridElements
+        .filter((element) => element.type === "decor")
+        .map((element) => element.id);
     },
   },
   beforeMount() {
@@ -196,12 +207,50 @@ export default {
     });
   },
   methods: {
+    ...mapMutations(["setBouquetsBasket"]),
     show(type) {
       if (type === "decor") {
         this.isDecor = true;
       } else {
         this.isDecor = false;
       }
+    },
+    addToBasket() {
+      this.$swal({
+        title: "Enter name of bouquet",
+        input: "text",
+        showCancelButton: true,
+        confirmButtonText: "Submit",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const inputValue = result.value;
+          createBouquet({
+            user_id: this.getUserId,
+            name: inputValue,
+            total_price: this.getTotalPrice,
+            configuration: this.gridElements,
+            flowers: this.getFlowersIdsFromGrid,
+            decors: this.getDecorsIdsFromGrid,
+          }).then((response) => {
+            // this.resultBouquet = response.data.bouquet;
+            this.$swal({
+              title: "Enter amount of bouquets",
+              input: "number",
+              showCancelButton: true,
+              confirmButtonText: "Submit",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.resultBouquet = {
+                  ...response.data.bouquet,
+                  amount: result.value,
+                };
+                this.setBouquetsBasket(this.resultBouquet);
+                this.$router.push(`/make-order`);
+              }
+            });
+          });
+        }
+      });
     },
     addNewElementToGrid(imageId, elementId, type, price) {
       this.gridElements.push({

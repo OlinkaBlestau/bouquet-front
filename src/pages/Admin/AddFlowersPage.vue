@@ -78,9 +78,15 @@
 <script>
 import { createFlower, imageFlowerUpload } from "@/api/api_request";
 import Swal from "sweetalert2";
+import myButton from "@/components/UI/MyButton.vue";
+import myInput from "@/components/UI/MyInput.vue";
 
 export default {
   name: "AddFlowersPage",
+  components: {
+    myButton,
+    myInput,
+  },
   data() {
     return {
       name: "",

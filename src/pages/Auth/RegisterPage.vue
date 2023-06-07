@@ -94,8 +94,11 @@
 <script>
 import { registration } from "@/api/api_request";
 import Swal from "sweetalert2";
+import myButton from "@/components/UI/MyButton.vue";
+import myInput from "@/components/UI/MyInput.vue";
 export default {
   name: "RegisterPage",
+  components: { myButton, myInput },
   data() {
     return {
       email: "",
