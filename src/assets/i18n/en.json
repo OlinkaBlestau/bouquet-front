@@ -173,5 +173,10 @@
     "pay": "Pay",
     "cancel": "Cancel",
     "topay": "To pay:"
+  },
+  "payment": {
+    "title": "Payment for bouquet",
+    "btn": "Pay"
+
   }
 }

@@ -1,30 +1,34 @@
 <template>
   <div class="w-50 m-auto cont">
-    <h2 class="mb-5 text-center" style="font-size: 2.3vw">Оплата замовлення</h2>
-    <form id="stripe-payment-element-form">
-      <div class="form-group">
-        <input
-          class="form-control"
-          style="height: 50px"
-          id="card-holder-name"
-          type="text"
-          v-model="fullName"
-        />
+    <div class="payment">
+      <h2 class="text-center title" style="font-size: 2.3vw">
+        {{ $t("payment.title") }}
+      </h2>
+      <form id="stripe-payment-element-form">
+        <div class="form-group">
+          <input
+            class="form-control"
+            style="height: 50px"
+            id="card-holder-name"
+            type="text"
+            v-model="fullName"
+          />
+        </div>
+        <div id="stripe-payment-element-mount-point" />
+        <slot name="stripe-payment-element-errors">
+          <div id="stripe-payment-element-errors" role="alert" />
+        </slot>
+      </form>
+      <div class="d-flex justify-content-center">
+        <button
+          ref="submitButtonRef"
+          @click="purchase($event)"
+          type="submit"
+          class="custom-button m-auto"
+        >
+          {{ $t("payment.btn") }}
+        </button>
       </div>
-      <div id="stripe-payment-element-mount-point" />
-      <slot name="stripe-payment-element-errors">
-        <div id="stripe-payment-element-errors" role="alert" />
-      </slot>
-    </form>
-    <div class="mt-5 d-flex justify-content-center">
-      <button
-        ref="submitButtonRef"
-        @click="purchase($event)"
-        type="submit"
-        class="custom-button m-auto"
-      >
-        Оплатити
-      </button>
     </div>
   </div>
 </template>
@@ -43,6 +47,13 @@ export default {
         clientSecret: "",
       },
     };
+  },
+  mounted() {
+    document.body.style.background =
+      "linear-gradient(to left, #F5B9FF, #B6CFD3)";
+  },
+  beforeUnmount() {
+    document.body.style.backgroundColor = "";
   },
   async beforeMount() {
     const stripe = await loadStripe(process.env.VUE_APP_STRIPE_PUBLIC_KEY);
@@ -118,29 +129,35 @@ export default {
 <style scoped>
 .cont {
   position: relative;
-  top: 150px;
+  top: 80px;
 }
 form {
-  border: 1px solid #4d7cbc;
-  border-radius: 20px;
-  padding: 20px;
+  padding: 40px;
+}
+.title {
+  margin-top: 35px;
+  font-family: "Marmelad", sans-serif;
 }
 .custom-button {
-  border: 1px solid #4d7cbc;
-  background-color: transparent;
-  color: #000000;
-  font-size: 1.4vw;
-  width: 20%;
+  background-color: #e1225d;
+  color: #fff;
+  border: none;
+  font-size: 1.1vw;
+  width: 200px;
+  height: 55px;
   border-radius: 20px;
-  padding: 5px;
 }
-
+.custom-button:hover {
+  background-color: #fff;
+  color: #000;
+}
+.payment {
+  background-color: #ffdede;
+  padding: 10px;
+  border-radius: 20px;
+}
 .form-group {
   margin-bottom: 15px;
-}
-
-.form-label {
-  font-weight: bold;
 }
 
 .form-control {
@@ -149,13 +166,7 @@ form {
   letter-spacing: 2px;
   height: 30px;
   padding: 10px;
-  border: 1px solid #ced4da;
   border-radius: 4px;
   outline: none;
-}
-
-.form-control:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 </style>
