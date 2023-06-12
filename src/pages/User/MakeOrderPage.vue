@@ -47,7 +47,9 @@
     <button class="btn pay" @click="this.$router.push(`/payment/`)">
       {{ $t("orders.pay") }}
     </button>
-    <button class="btn cancel">{{ $t("orders.cancel") }}</button>
+    <button class="btn cancel" @click="this.$router.push(`/view-bouquets/`)">
+      {{ $t("orders.cancel") }}
+    </button>
   </div>
 </template>
 

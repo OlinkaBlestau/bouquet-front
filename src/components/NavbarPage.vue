@@ -119,7 +119,7 @@
             </a>
           </li>
           <li class="nav-item" v-if="isAuth && getRole == 'user'">
-            <a class="nav-link" :href="`/contact`">{{
+            <a class="nav-link" :href="`/my-order-page`">{{
               $t("navbar.myorders")
             }}</a>
           </li>

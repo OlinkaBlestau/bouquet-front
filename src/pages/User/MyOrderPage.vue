@@ -1,24 +1,25 @@
 <template>
   <div class="cont m-auto">
     <h2 class="text-center mb-5">{{ $t("tables.vieworders") }}</h2>
-    <TableOrderComponent :orders="orders" />
+    <TableMyOrderComponent :orders="orders" />
   </div>
 </template>
 <script>
-import TableOrderComponent from "@/components/TableOrderComponent.vue";
-import { getAllOrders } from "@/api/api_request";
+import TableMyOrderComponent from "@/components/TableMyOrderComponent.vue";
+import { getMyOrders } from "@/api/api_request";
 
 export default {
-  name: "ViewOrdersPage",
-  components: { TableOrderComponent },
+  name: "MyOrderPage",
+  components: { TableMyOrderComponent },
   data() {
     return {
       orders: [],
     };
   },
   beforeMount() {
-    getAllOrders().then((response) => {
-      this.orders = response.data.orders;
+    let id = localStorage.getItem("userId");
+    getMyOrders(id).then((response) => {
+      this.orders = response.data.order;
     });
   },
   mounted() {

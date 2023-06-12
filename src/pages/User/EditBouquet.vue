@@ -102,9 +102,10 @@
         <div v-for="(element, index) in gridElements" :key="index">
           <DDR
             style="min-width: 8%; object-fit: contain; height: auto"
+            :key="element.draggable_id"
             :onResize="handleResizeAction"
-            :beforeActive="() => handleActive(element.id)"
-            :active="index === selectedElementIndex"
+            :beforeActive="selectElement(index)"
+            :active="element.transform.active"
             :onRotate="handleRotateAction"
             :onDrag="handleDragAction"
             :value="element.transform"
@@ -155,7 +156,7 @@ export default {
       decors: [],
       flowers: [],
       isDecor: true,
-      selectedElementIndex: -1, // Индекс выбранного элемента
+      selectedElementIndex: null, // Индекс выбранного элемента
       hasBouquets: true, // По умолчанию считаем, что у пользователя есть букеты
     };
   },
@@ -207,21 +208,46 @@ export default {
       }
     },
     addNewElementToGrid(imageId, elementId, type, price) {
+      const index =
+        this.gridElements.length === 0
+          ? 0
+          : this.gridElements.lastIndexOf(
+              this.gridElements[this.gridElements.length - 1]
+            ) + 1;
+
       this.gridElements.push({
         ...{
           transform: {
             ...this.getDefaultAttributesForElement,
-            id: elementId,
+            draggable_id: index,
+            active: true,
           },
         },
         ...{
           image_id: imageId,
           id: elementId,
+          draggable_id: index,
           type: type,
           price: Number.parseInt(price),
         },
       });
-      this.selectedElementIndex = this.gridElements.length - 1;
+
+      this.gridElements.forEach((element) => {
+        if (element.draggable_id !== index) {
+          element.transform.active = false;
+        }
+      });
+    },
+    selectElement(index) {
+      return () => {
+        this.selectedElementId = this.gridElements[index].id;
+        this.gridElements.forEach((element, i) => {
+          element.transform.active = i === index;
+        });
+      };
+    },
+    clearSelectedElement() {
+      this.selectedElementIndex = -1;
     },
     getImgUrl(imagePath) {
       return `http://localhost/storage/${imagePath}`;
@@ -236,9 +262,9 @@ export default {
       this.defaultHandlerAction(transform);
     },
     handleActive(id) {
-      this.selectedElementIndex = this.gridElements.findIndex(
-        (element) => element.id === id
-      );
+      this.gridElements.forEach((element) => {
+        element.transform.active = element.draggable_id === id;
+      });
     },
     defaultHandlerAction(transform) {
       if (transform !== undefined) {
@@ -257,13 +283,14 @@ export default {
       }
     },
     deleteElement() {
-      console.log(this.selectedElementIndex);
-      if (this.selectedElementIndex === -1) {
-        this.selectedElementIndex = this.gridElements.length - 1;
-      }
-      if (this.selectedElementIndex !== -1) {
-        this.gridElements.splice(this.selectedElementIndex, 1);
-        this.selectedElementIndex = -1; // Сброс выбранного элемента после удаления
+      if (this.selectedElementId !== null) {
+        const index = this.gridElements.findIndex(
+          (element) => element.id === this.selectedElementId
+        );
+        if (index !== -1) {
+          this.gridElements.splice(index, 1);
+          this.selectedElementId = null; // Сброс выбранного элемента после удаления
+        }
       }
     },
     clearGrid() {

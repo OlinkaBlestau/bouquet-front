@@ -3,11 +3,9 @@
     <thead style="background-color: #ffdede">
       <tr>
         <th scope="col">№</th>
-        <th scope="col">{{ $t("tables.firstname") }}</th>
-        <th scope="col">{{ $t("tables.lastname") }}</th>
-        <th scope="col">{{ $t("tables.totalprice") }}</th>
+        <th scope="col">Назва букета</th>
+        <th scope="col">Ціна</th>
         <th scope="col">{{ $t("tables.date") }}</th>
-        <th scope="col">{{ $t("tables.phone") }}</th>
         <th scope="col">{{ $t("tables.view") }}</th>
       </tr>
     </thead>
@@ -18,15 +16,13 @@
         style="border-color: #3a0000"
       >
         <td>{{ index + 1 }}</td>
-        <td>{{ order.bouquet.user.first_name }}</td>
-        <td>{{ order.bouquet.user.last_name }}</td>
+        <td>{{ order.bouquet.name }}</td>
         <td>{{ getTotalPrice(order) }}</td>
         <td>{{ momentDate(order.created_at) }}</td>
-        <td>{{ order.bouquet.user.phone }}</td>
         <td>
           <button
             style="background-color: transparent; border: none"
-            @click="$router.push(`/current-order-admin/${order.id}`)"
+            @click="$router.push(`/view-order/${order.id}`)"
           >
             <img
               src="../assets/images/icon-open.png"
@@ -45,7 +41,7 @@ import moment from "moment/moment";
 import router from "@/router/router";
 
 export default {
-  name: "TableOrderComponent",
+  name: "TableMyOrderComponent",
   props: {
     orders: {
       type: Array,

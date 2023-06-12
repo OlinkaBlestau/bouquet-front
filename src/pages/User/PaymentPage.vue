@@ -105,6 +105,9 @@ export default {
               },
             });
           })
+          .then(() => {
+            // this.$router.push(`/view-bouquets/`);
+          })
           .catch(() => {
             this.$swal({
               icon: "error",

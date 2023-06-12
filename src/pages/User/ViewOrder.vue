@@ -2,36 +2,6 @@
   <div class="cont m-auto">
     <h1>{{ $t("orders.order") }} №1</h1>
     <div class="cont-info-order d-flex justify-content-between">
-      <div class="contacts-info">
-        <div class="contacts-info-item">
-          <h1
-            class="text-center"
-            style="position: relative; top: 10px; margin-bottom: 55px"
-          >
-            {{ $t("orders.profile") }}
-          </h1>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.firstname") }}</p>
-            <p>{{ order.bouquet.user.first_name }}</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.lastname") }}</p>
-            <p>{{ order.bouquet.user.last_name }}</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>Email</p>
-            <p>{{ order.bouquet.user.email }}</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.phone") }}</p>
-            <p>{{ order.bouquet.user.phone }}</p>
-          </div>
-          <div class="info-block d-flex justify-content-between">
-            <p>{{ $t("orders.address") }}</p>
-            <p>{{ order.bouquet.user.address }}</p>
-          </div>
-        </div>
-      </div>
       <div class="bouquet-consist">
         <div class="bouquet-info">
           <div class="bouquet-info-item">
@@ -81,7 +51,7 @@
 import { getOrder } from "@/api/api_request";
 
 export default {
-  name: "CurrentOrderPage",
+  name: "ViewOrder",
   data() {
     return {
       order: [],

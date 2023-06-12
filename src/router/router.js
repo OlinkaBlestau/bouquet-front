@@ -22,6 +22,8 @@ import EditBouquet from "@/pages/User/EditBouquet.vue";
 import StatisticsPage from "@/pages/Admin/StatisticsPage.vue";
 import MakeOrderPage from "@/pages/User/MakeOrderPage.vue";
 import PaymentPage from "@/pages/User/PaymentPage.vue";
+import MyOrderPage from "@/pages/User/MyOrderPage.vue";
+import ViewOrder from "@/pages/User/ViewOrder.vue";
 
 const routes = [
   {
@@ -194,12 +196,44 @@ const routes = [
     },
   },
   {
-    path: "/current-order-admin",
+    path: "/current-order-admin/:id",
     component: CurrentOrderPage,
     beforeEnter: (to, from, next) => {
       if (
         store.getters["isAuth"] === false ||
         store.getters["getRole"] === "user"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+
+  {
+    path: "/my-order-page",
+    component: MyOrderPage,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "admin"
+      ) {
+        return next({
+          name: "main",
+        });
+      }
+      next();
+    },
+  },
+
+  {
+    path: "/view-order/:id",
+    component: ViewOrder,
+    beforeEnter: (to, from, next) => {
+      if (
+        store.getters["isAuth"] === false ||
+        store.getters["getRole"] === "admin"
       ) {
         return next({
           name: "main",

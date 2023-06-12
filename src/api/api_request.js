@@ -33,6 +33,11 @@ export const imageFlowerUpload = (id, data) =>
   axios.post(`${BASE_PATH_API}image/upload/flower/${id}`, data);
 
 export const getDecors = () => axios.get(`${BASE_PATH_API}decors`);
+export const getAllOrders = () => axios.get(`${BASE_PATH_API}orders`);
+export const getMyOrders = (id) =>
+  axios.get(`${BASE_PATH_API}orders/user/${id}`);
+export const getOrder = (id) => axios.get(`${BASE_PATH_API}orders/${id}`);
+
 export const getFlowers = () => axios.get(`${BASE_PATH_API}flowers`);
 export const updateDecor = (id, data) =>
   axios.put(`${BASE_PATH_API}decors/${id}`, data);
