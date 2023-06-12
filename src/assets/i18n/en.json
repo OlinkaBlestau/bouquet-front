@@ -118,7 +118,7 @@
     "editflower": "Edit flower",
     "btnsave": "Save changes"
   },
-  "bouquet":{
+  "bouquet": {
     "viewbouquet": "View bouquets",
     "btnsave": "Save",
     "btndelete": "Delete",
@@ -127,6 +127,8 @@
     "decors":"Decors",
     "flowers": "Flowers",
     "titleno": "There are no created bouquets",
+
+    "btnsloy": "Change layer",
 
     "titleerorrname": "Name error",
     "texterorrname": "Please enter the name in Ukrainian or English",
@@ -154,7 +156,24 @@
 
     "texterrorpricebetween": "Please enter a price greater than 0 and less than UAH 500.",
 
-    "texterrorpamounttween": "Please enter a quantity greater than 0 and less than 500."
+    "texterrorpamounttween": "Please enter a quantity greater than 0 and less than 500.",
+
+    "no_f_d": "No Flowers or Decors",
+    "add_f_d": "Please add at least one flower or decor to your bouquet.",
+    "n_f": "No Flowers",
+    "add_f": "Please add at least one flower to your bouquet.",
+    "n_d": "No Decors",
+    "add_d": "Please add at least one decor to your bouquet.",
+
+    "enter_name": "Enter name of bouquet",
+
+    "enter_amount": "Enter amount of bouquets",
+
+    "n_element": "No Elements",
+    "empty": "You cannot save an empty bouquet.",
+
+    "submit": "Submit"
+
   },
   "orders":{
     "order": "Order",

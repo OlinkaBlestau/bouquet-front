@@ -3,7 +3,7 @@
     <div class="vs-header d-flex justify-content-end">
       <div class="header-actions">
         <button
-          style="background-color: #e1225d"
+          id="delete"
           title="Delete selected component"
           data-action="delete"
           @click="deleteElement"
@@ -11,11 +11,19 @@
           {{ $t("bouquet.btndelete") }}
         </button>
         <button
+          id="clear"
           title="Clear all components in the editing area"
           data-action="clear"
           @click="clearGrid"
         >
           {{ $t("bouquet.btnclear") }}
+        </button>
+        <button
+          id="sloy"
+          title="Bring selected component to the front"
+          @click="moveElementToFront"
+        >
+          {{ $t("bouquet.btnsloy") }}
         </button>
         <button
           title="Clear all components in the editing area"
@@ -99,12 +107,16 @@
         </div>
       </div>
       <div>
-        <div v-for="(element, index) in gridElements" :key="index">
+        <div
+          v-for="(element, index) in gridElements"
+          :key="index"
+          @click="selectElement(index)"
+        >
           <DDR
             :key="element.draggable_id"
             style="min-width: 8%; object-fit: contain; height: auto"
             :onResize="handleResizeAction"
-            :beforeActive="handleActive(element.draggable_id)"
+            :beforeActive="selectElement(index)"
             :onRotate="handleRotateAction"
             :onDrag="handleDragAction"
             :value="element.transform"
@@ -127,7 +139,11 @@
           </DDR>
         </div>
       </div>
-      <GridComponent class="grid" style="height: 100vh" />
+      <GridComponent
+        class="grid"
+        style="height: 100vh"
+        @click="clearSelectedElement"
+      />
     </div>
   </div>
 </template>
@@ -156,7 +172,7 @@ export default {
       flowers: [],
       resultBouquet: [],
       isDecor: true,
-      selectedElementIndex: -1, // Индекс выбранного элемента
+      selectedElementIndex: null, // Индекс выбранного элемента
     };
   },
   computed: {
@@ -208,6 +224,25 @@ export default {
     });
   },
   methods: {
+    moveElementToFront(index) {
+      if (index === this.gridElements.length - 1) {
+        // Элемент уже на переднем плане
+        return;
+      }
+      const element = this.gridElements.splice(index, 1)[0];
+      this.gridElements.push(element);
+    },
+    selectElement(index) {
+      return () => {
+        this.selectedElementId = this.gridElements[index].id;
+        this.gridElements.forEach((element, i) => {
+          element.transform.active = i === index;
+        });
+      };
+    },
+    clearSelectedElement() {
+      this.selectedElementIndex = -1;
+    },
     ...mapMutations(["setBouquetsBasket"]),
     show(type) {
       if (type === "decor") {
@@ -217,11 +252,70 @@ export default {
       }
     },
     addToBasket() {
+      const hasFlowers = this.getFlowersIdsFromGrid.length > 0;
+      const hasDecors = this.getDecorsIdsFromGrid.length > 0;
+
+      if (!hasFlowers && !hasDecors) {
+        // Show a notification or alert to inform the user that they need to add flowers or decors
+        this.$swal({
+          title: this.$t("bouquet.no_f_d"),
+          text: this.$t("bouquet.add_f_d"),
+          icon: "warning",
+          color: "#000",
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
+      if (!hasFlowers) {
+        // Show a notification or alert to inform the user that they need to add flowers
+        this.$swal({
+          title: this.$t("bouquet.n_f"),
+          text: this.$t("bouquet.add_f"),
+          icon: "warning",
+          color: "#000",
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
+
+      if (!hasDecors) {
+        // Show a notification or alert to inform the user that they need to add decors
+        this.$swal({
+          title: this.$t("bouquet.n_d"),
+          text: this.$t("bouquet.add_d"),
+          icon: "warning",
+          color: "#000",
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
       this.$swal({
-        title: "Enter name of bouquet",
+        title: this.$t("bouquet.enter_name"),
         input: "text",
         showCancelButton: true,
-        confirmButtonText: "Submit",
+        confirmButtonText: this.$t("bouquet.submit"),
       }).then((result) => {
         if (result.isConfirmed) {
           const inputValue = result.value;
@@ -235,10 +329,10 @@ export default {
           }).then((response) => {
             // this.resultBouquet = response.data.bouquet;
             this.$swal({
-              title: "Enter amount of bouquets",
+              title: this.$t("bouquet.enter_amount"),
               input: "number",
               showCancelButton: true,
-              confirmButtonText: "Submit",
+              confirmButtonText: this.$t("bouquet.submit"),
             }).then((result) => {
               if (result.isConfirmed) {
                 this.resultBouquet = {
@@ -284,6 +378,7 @@ export default {
         }
       });
     },
+
     getImgUrl(imagePath) {
       return `http://localhost/storage/${imagePath}`;
     },
@@ -322,12 +417,14 @@ export default {
     },
 
     deleteElement() {
-      if (this.selectedElementIndex === -1) {
-        this.selectedElementIndex = this.gridElements.length - 1;
-      }
-      if (this.selectedElementIndex !== -1) {
-        this.gridElements.splice(this.selectedElementIndex, 1);
-        this.selectedElementIndex = -1; // Сброс выбранного элемента после удаления
+      if (this.selectedElementId !== null) {
+        const index = this.gridElements.findIndex(
+          (element) => element.id === this.selectedElementId
+        );
+        if (index !== -1) {
+          this.gridElements.splice(index, 1);
+          this.selectedElementId = null; // Сброс выбранного элемента после удаления
+        }
       }
     },
     clearGrid() {
@@ -336,11 +433,29 @@ export default {
       }
     },
     saveBouquet() {
+      if (this.gridElements.length === 0) {
+        // Show a notification or alert to inform the user that there are no elements to save
+        this.$swal({
+          title: this.$t("bouquet.n_element"),
+          text: this.$t("bouquet.empty"),
+          icon: "warning",
+          color: "#000",
+          timer: 4000,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+          timerProgressBar: true,
+        });
+        return;
+      }
       this.$swal({
-        title: "Enter name of bouquet",
+        title: this.$t("bouquet.enter_name"),
         input: "text",
         showCancelButton: true,
-        confirmButtonText: "Submit",
+        confirmButtonText: this.$t("bouquet.submit"),
       }).then((result) => {
         if (result.isConfirmed) {
           const inputValue = result.value;
@@ -416,7 +531,7 @@ export default {
   }
   button {
     padding: 5px 12px;
-    font-size: 1.3vw;
+    font-size: 1.1vw;
     color: #fff;
     background: #e1225d;
     border: 1px solid #d5d5d5;
@@ -429,5 +544,13 @@ export default {
       background-image: linear-gradient(to bottom, #eee 0, #ddd 100%);
     }
   }
+}
+
+#delete,
+#sloy,
+#clear {
+  border: #000 solid 1px;
+  background-color: transparent;
+  color: #000;
 }
 </style>
