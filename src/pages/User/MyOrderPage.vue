@@ -1,7 +1,10 @@
 <template>
   <div class="cont m-auto">
     <h2 class="text-center mb-5">{{ $t("tables.vieworders") }}</h2>
-    <TableMyOrderComponent :orders="orders" />
+    <div v-if="orders.length > 0">
+      <TableMyOrderComponent :orders="orders" />
+    </div>
+    <h2 class="hidden-title" v-else>{{ $t("tables.no_order") }}</h2>
   </div>
 </template>
 <script>
@@ -42,5 +45,12 @@ h2 {
   font-family: "Marmelad", sans-serif;
   color: #3a0000;
   font-size: 2vw;
+}
+.hidden-title {
+  font-size: 1.7vw;
+  text-align: center;
+  margin-top: 150px;
+  color: #f8f8f8;
+  letter-spacing: 5px;
 }
 </style>

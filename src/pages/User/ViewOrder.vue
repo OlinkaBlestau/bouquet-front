@@ -1,7 +1,7 @@
 <template>
   <div class="cont m-auto">
-    <h1>{{ $t("orders.order") }} №1</h1>
-    <div class="cont-info-order d-flex justify-content-between">
+    <h1>{{ $t("orders.order") }} № {{ order.id }}</h1>
+    <div class="cont-info-order d-flex justify-content-between m-5">
       <div class="bouquet-consist">
         <div class="bouquet-info">
           <div class="bouquet-info-item">
@@ -11,17 +11,6 @@
             >
               {{ $t("orders.composition") }}
             </h1>
-            <div
-              v-for="decor in order.bouquet.decors"
-              :key="decor"
-              class="info-block d-flex justify-content-between"
-            >
-              <p>{{ decor.name }}</p>
-              <p>{{ decor.color }}</p>
-              <!--              <p>3 {{ $t("orders.units") }}</p>-->
-              <p>{{ decor.price }} {{ $t("orders.uahunit") }}</p>
-            </div>
-            <hr />
             <div
               v-for="flower in order.bouquet.flowers"
               :key="flower"
@@ -33,17 +22,27 @@
               <p>{{ flower.price }}{{ $t("orders.uahunit") }}</p>
             </div>
             <hr />
+            <div
+              v-for="decor in order.bouquet.decors"
+              :key="decor"
+              class="info-block d-flex justify-content-between"
+            >
+              <p>{{ decor.name }}</p>
+              <p>{{ decor.color }}</p>
+              <!--              <p>3 {{ $t("orders.units") }}</p>-->
+              <p>{{ decor.price }} {{ $t("orders.uahunit") }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="total-price d-flex justify-content-between">
-      <p style="top: 10px; position: relative; font-weight: bold">
-        {{ $t("orders.totalprice") }}
-      </p>
-      <p style="top: 10px; position: relative; font-weight: bold">
-        {{ getTotalPrice(order) }} {{ $t("orders.uah") }}
-      </p>
+      <div class="total-price d-flex justify-content-between">
+        <p style="top: 10px; position: relative; font-weight: bold">
+          {{ $t("orders.totalprice") }}
+        </p>
+        <p style="top: 10px; position: relative; font-weight: bold">
+          {{ getTotalPrice(order) }} {{ $t("orders.uah") }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -84,15 +83,13 @@ export default {
   top: 50px;
 }
 .total-price {
-  width: 41%;
+  width: 580px;
+  height: 91px;
   background-color: #ffffff;
   font-size: 1.2vw;
   font-family: "Comfortaa", cursive;
-  position: absolute;
   border-radius: 25px;
   padding: 20px;
-  right: 996px;
-  top: 600px;
   box-shadow: 0 5px 10px -2px gray;
   font-weight: bold;
 }
@@ -100,26 +97,14 @@ h1 {
   text-align: center;
   font-family: "Marmelad", sans-serif;
 }
-.contacts-info-item {
+.bouquet-info-item {
   position: relative;
+  right: 100px;
   width: 170%;
   font-size: 1.2vw;
   background-color: #ffdede;
   padding: 25px;
   box-shadow: 0 5px 10px -2px gray;
-  top: 50px;
-  left: -128px;
-  border-radius: 25px;
-}
-.bouquet-info-item {
-  position: relative;
-  width: 200%;
-  font-size: 1.2vw;
-  background-color: #ffdede;
-  padding: 25px;
-  box-shadow: 0 5px 10px -2px gray;
-  top: 50px;
-  right: 415px;
   border-radius: 25px;
 }
 .contacts-info-item h1 {

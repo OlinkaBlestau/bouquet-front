@@ -1,6 +1,6 @@
 <template>
   <div class="cont m-auto">
-    <h1>{{ $t("orders.order") }} №1</h1>
+    <h1>{{ $t("orders.order") }} № {{ order.id }}</h1>
     <div class="cont-info-order d-flex justify-content-between">
       <div class="contacts-info">
         <div class="contacts-info-item">
@@ -114,14 +114,14 @@ export default {
   top: 50px;
 }
 .total-price {
-  width: 41%;
+  width: 35%;
   background-color: #ffffff;
   font-size: 1.2vw;
   font-family: "Comfortaa", cursive;
   position: absolute;
   border-radius: 25px;
   padding: 20px;
-  right: 996px;
+  left: -128px;
   top: 600px;
   box-shadow: 0 5px 10px -2px gray;
   font-weight: bold;
@@ -132,7 +132,7 @@ h1 {
 }
 .contacts-info-item {
   position: relative;
-  width: 170%;
+  width: 135%;
   font-size: 1.2vw;
   background-color: #ffdede;
   padding: 25px;

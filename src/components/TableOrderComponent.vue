@@ -8,6 +8,7 @@
         <th scope="col">{{ $t("tables.totalprice") }}</th>
         <th scope="col">{{ $t("tables.date") }}</th>
         <th scope="col">{{ $t("tables.phone") }}</th>
+        <th scope="col">{{ $t("tables.amount") }}</th>
         <th scope="col">{{ $t("tables.view") }}</th>
       </tr>
     </thead>
@@ -17,12 +18,13 @@
         :key="index"
         style="border-color: #3a0000"
       >
-        <td>{{ index + 1 }}</td>
+        <td>{{ order.id }}</td>
         <td>{{ order.bouquet.user.first_name }}</td>
         <td>{{ order.bouquet.user.last_name }}</td>
         <td>{{ getTotalPrice(order) }}</td>
         <td>{{ momentDate(order.created_at) }}</td>
         <td>{{ order.bouquet.user.phone }}</td>
+        <td>{{ order.amount }}</td>
         <td>
           <button
             style="background-color: transparent; border: none"

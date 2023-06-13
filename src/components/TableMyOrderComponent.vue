@@ -3,8 +3,9 @@
     <thead style="background-color: #ffdede">
       <tr>
         <th scope="col">№</th>
-        <th scope="col">Назва букета</th>
-        <th scope="col">Ціна</th>
+        <th scope="col">{{ $t("tables.name_b") }}</th>
+        <th scope="col">{{ $t("tables.Price") }}</th>
+        <th scope="col">{{ $t("tables.amount") }}</th>
         <th scope="col">{{ $t("tables.date") }}</th>
         <th scope="col">{{ $t("tables.view") }}</th>
       </tr>
@@ -15,9 +16,10 @@
         :key="index"
         style="border-color: #3a0000"
       >
-        <td>{{ index + 1 }}</td>
+        <td>{{ order.id }}</td>
         <td>{{ order.bouquet.name }}</td>
         <td>{{ getTotalPrice(order) }}</td>
+        <td>{{ order.amount }}</td>
         <td>{{ momentDate(order.created_at) }}</td>
         <td>
           <button

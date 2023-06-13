@@ -116,7 +116,12 @@
     "addflower": "Add flower",
     "editdecor": "Edit decor",
     "editflower": "Edit flower",
-    "btnsave": "Save changes"
+    "btnsave": "Save changes",
+
+    "name_b": "Name of bouquet",
+    "amount": "Amount",
+
+    "no_order": "There are no orders"
   },
   "bouquet": {
     "viewbouquet": "View bouquets",
