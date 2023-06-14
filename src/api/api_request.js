@@ -67,3 +67,6 @@ export const getStripeIntent = (id) =>
 
 export const purchase = (data) =>
   axios.post(`${BASE_PATH_API}stripe/purchase/`, data);
+
+export const getSaleStatistic = (params) =>
+  axios.get(`${BASE_PATH_API}statistic/sale/`, { params });

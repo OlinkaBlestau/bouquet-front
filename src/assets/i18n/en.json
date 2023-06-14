@@ -202,5 +202,10 @@
     "title": "Payment for bouquet",
     "btn": "Pay"
 
+  },
+  "statistics": {
+    "statistics" : "Statistics",
+    "month": "Month",
+    "year": "Year"
   }
 }
