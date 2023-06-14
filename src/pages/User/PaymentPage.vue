@@ -106,7 +106,7 @@ export default {
             });
           })
           .then(() => {
-            this.$router.push(`/view-bouquets/`);
+            this.$router.push(`/my-order-page/`);
           })
           .catch(() => {
             this.$swal({
