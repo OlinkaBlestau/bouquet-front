@@ -227,31 +227,65 @@ export default {
       }
     },
     addToBasket() {
-      updateBouquet(this.$route.params.id, {
-        user_id: this.getUserId,
-        name: this.name,
-        total_price: this.getTotalPrice,
-        configuration: this.gridElements,
-        flowers: this.getFlowersIdsFromGrid,
-        decors: this.getDecorsIdsFromGrid,
-      }).then((response) => {
+      if (this.gridElements.length === 0) {
+        // Show a notification using this.$swal
         this.$swal({
-          title: this.$t("bouquet.enter_amount"),
-          input: "number",
-          showCancelButton: true,
-          confirmButtonText: this.$t("bouquet.submit"),
-        }).then((result) => {
-          if (result.isConfirmed) {
-            this.resultBouquet = {
-              ...response.data.bouquet,
-              amount: result.value,
-              total_price: this.getTotalPrice * result.value,
-            };
-            this.setBouquetsBasket(this.resultBouquet);
-            this.$router.push(`/make-order`);
-          }
+          title: "Error",
+          text: "Cannot save an empty bouquet. Please add flowers or decors to the editing area.",
+          icon: "error",
         });
-      });
+        return; // Stop execution if the check fails
+      }
+      const hasFlowers = this.gridElements.some(
+        (element) => element.type === "flower"
+      );
+
+      // Check if there are decors in the gridElements
+      const hasDecors = this.gridElements.some(
+        (element) => element.type === "decor"
+      );
+
+      if (!hasFlowers) {
+        // Display a warning to the user if there are no flowers
+        this.$swal({
+          title: "Warning",
+          text: "Please add at least one flower to the bouquet.",
+          icon: "warning",
+        });
+      } else if (!hasDecors) {
+        // Display a warning to the user if there are no decors
+        this.$swal({
+          title: "Warning",
+          text: "Please add at least one decor to the bouquet.",
+          icon: "warning",
+        });
+      } else {
+        updateBouquet(this.$route.params.id, {
+          user_id: this.getUserId,
+          name: this.name,
+          total_price: this.getTotalPrice,
+          configuration: this.gridElements,
+          flowers: this.getFlowersIdsFromGrid,
+          decors: this.getDecorsIdsFromGrid,
+        }).then((response) => {
+          this.$swal({
+            title: this.$t("bouquet.enter_amount"),
+            input: "number",
+            showCancelButton: true,
+            confirmButtonText: this.$t("bouquet.submit"),
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.resultBouquet = {
+                ...response.data.bouquet,
+                amount: result.value,
+                total_price: this.getTotalPrice * result.value,
+              };
+              this.setBouquetsBasket(this.resultBouquet);
+              this.$router.push(`/make-order`);
+            }
+          });
+        });
+      }
     },
     moveElementToFront(index) {
       if (index === this.gridElements.length - 1) {
@@ -353,16 +387,50 @@ export default {
       }
     },
     saveBouquet() {
-      updateBouquet(this.$route.params.id, {
-        user_id: this.getUserId,
-        name: this.name,
-        total_price: this.getTotalPrice,
-        configuration: this.gridElements,
-        flowers: this.getFlowersIdsFromGrid,
-        decors: this.getDecorsIdsFromGrid,
-      }).then(() => {
-        this.$router.push("/view-bouquets");
-      });
+      if (this.gridElements.length === 0) {
+        // Show a notification using this.$swal
+        this.$swal({
+          title: "Error",
+          text: "Cannot save an empty bouquet. Please add flowers or decors to the editing area.",
+          icon: "error",
+        });
+        return; // Stop execution if the check fails
+      }
+      const hasFlowers = this.gridElements.some(
+        (element) => element.type === "flower"
+      );
+
+      // Check if there are decors in the gridElements
+      const hasDecors = this.gridElements.some(
+        (element) => element.type === "decor"
+      );
+
+      if (!hasFlowers) {
+        // Display a warning to the user if there are no flowers
+        this.$swal({
+          title: "Warning",
+          text: "Please add at least one flower to the bouquet.",
+          icon: "warning",
+        });
+      } else if (!hasDecors) {
+        // Display a warning to the user if there are no decors
+        this.$swal({
+          title: "Warning",
+          text: "Please add at least one decor to the bouquet.",
+          icon: "warning",
+        });
+      } else {
+        updateBouquet(this.$route.params.id, {
+          user_id: this.getUserId,
+          name: this.name,
+          total_price: this.getTotalPrice,
+          configuration: this.gridElements,
+          flowers: this.getFlowersIdsFromGrid,
+          decors: this.getDecorsIdsFromGrid,
+        }).then(() => {
+          this.$router.push("/view-bouquets");
+        });
+      }
     },
   },
 };
