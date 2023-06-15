@@ -37,6 +37,12 @@
       </div>
       <div class="total-price d-flex justify-content-between">
         <p style="top: 10px; position: relative; font-weight: bold">
+          {{ $t("orders.amount") }}
+        </p>
+        <p style="top: 10px; position: relative; font-weight: bold">
+          {{ order.amount }}
+        </p>
+        <p style="top: 10px; position: relative; font-weight: bold">
           {{ $t("orders.totalprice") }}
         </p>
         <p style="top: 10px; position: relative; font-weight: bold">

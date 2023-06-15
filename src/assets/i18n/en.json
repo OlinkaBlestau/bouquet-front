@@ -196,7 +196,8 @@
     "makeorder": "Create an order",
     "pay": "Pay",
     "cancel": "Cancel",
-    "topay": "To pay:"
+    "topay": "To pay:",
+    "amount": "Amount:"
   },
   "payment": {
     "title": "Payment for bouquet",

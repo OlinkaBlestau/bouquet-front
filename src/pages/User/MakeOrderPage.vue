@@ -37,16 +37,17 @@
       </div>
       <div class="total-price d-flex justify-content-between">
         <p style="top: 10px; position: relative; font-weight: bold">
+          {{ $t("orders.amount") }}
+        </p>
+        <p style="top: 10px; position: relative; font-weight: bold">
+          {{ getBouquetsBasket?.amount }}
+        </p>
+        <p style="top: 10px; position: relative; font-weight: bold">
           {{ $t("orders.topay") }}
         </p>
-        <p>{{ getBouquetsBasket?.amount }}</p>
+
         <p style="top: 10px; position: relative; font-weight: bold">
-          {{
-            getTotalPrice(
-              getBouquetsBasket?.total_price,
-              getBouquetsBasket?.amount
-            )
-          }}
+          {{ getBouquetsBasket?.total_price }}
           {{ $t("orders.uah") }}
         </p>
       </div>

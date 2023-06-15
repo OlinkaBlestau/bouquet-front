@@ -28,7 +28,7 @@
         <button
           title="Clear all components in the editing area"
           data-action="clear"
-          @click="saveBouquet"
+          @click="saveBouquet()"
         >
           {{ $t("bouquet.btnsave") }}
         </button>
@@ -358,6 +358,8 @@ export default {
         name: this.name,
         total_price: this.getTotalPrice,
         configuration: this.gridElements,
+        flowers: this.getFlowersIdsFromGrid,
+        decors: this.getDecorsIdsFromGrid,
       }).then(() => {
         this.$router.push("/view-bouquets");
       });
