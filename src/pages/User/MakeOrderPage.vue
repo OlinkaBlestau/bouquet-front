@@ -18,7 +18,7 @@
             >
               <p>{{ bouquet.name }}</p>
               <p>{{ bouquet.color }}</p>
-              <p>1 {{ $t("orders.units") }}</p>
+              <!--              <p>1 {{ $t("orders.units") }}</p>-->
               <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
             </div>
             <hr />
@@ -29,7 +29,7 @@
             >
               <p>{{ bouquet.name }}</p>
               <p>{{ bouquet.color }}</p>
-              <p>1 {{ $t("orders.units") }}</p>
+              <!--              <p>1 {{ $t("orders.units") }}</p>-->
               <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
             </div>
           </div>
@@ -39,8 +39,15 @@
         <p style="top: 10px; position: relative; font-weight: bold">
           {{ $t("orders.topay") }}
         </p>
+        <p>{{ getBouquetsBasket?.amount }}</p>
         <p style="top: 10px; position: relative; font-weight: bold">
-          {{ getBouquetsBasket?.total_price }} {{ $t("orders.uah") }}
+          {{
+            getTotalPrice(
+              getBouquetsBasket?.total_price,
+              getBouquetsBasket?.amount
+            )
+          }}
+          {{ $t("orders.uah") }}
         </p>
       </div>
     </div>
@@ -63,6 +70,11 @@ export default {
     return {
       order: [],
     };
+  },
+  methods: {
+    getTotalPrice(price, amount) {
+      return price * amount;
+    },
   },
   computed: {
     ...mapGetters(["getBouquetsBasket"]),

@@ -1,55 +1,15 @@
 <template>
   <div class="cont m-auto">
-    <h2
-      class="text-center"
-      style="
-        color: white;
-        font-size: 2.2vw;
-        letter-spacing: 2px;
-        margin-bottom: 30px;
-      "
-    >
+    <h1 class="text-center" style="margin-bottom: 60px">
       {{ $t("statistics.statistics") }}
-    </h2>
-    <div class="d-flex justify-content-evenly">
-      <button
-        class="mb-5"
-        style="width: 20%; height: 50px; font-size: 1.3vw; margin-top: 0"
-        :style="{
-          backgroundColor: isMonth === true ? '#000000' : 'rgba(0, 0, 0, 0)',
-          borderColor: isMonth === true ? '#000000' : '#000000',
-          color: isMonth === true ? '#fff' : '#fff',
-        }"
-        @click="show('month')"
-      >
-        {{ $t("statistics.month") }}
-      </button>
-      <button
-        class="mb-5"
-        style="
-          width: 20%;
-          height: 50px;
-          color: #ffffff;
-          font-size: 1.3vw;
-          margin-top: 0;
-        "
-        :style="{
-          backgroundColor: isMonth === false ? '#000000' : 'rgba(0, 0, 0, 0)',
-          borderColor: isMonth === false ? '#000000' : '#000000',
-          color: isMonth === false ? '#fff' : '#fff',
-        }"
-        @click="show('year')"
-      >
-        {{ $t("statistics.year") }}
-      </button>
-    </div>
+    </h1>
     <div
       v-if="isMonth === true"
       style="
         padding: 20px;
         height: 700px;
-        border-radius: 40px;
-        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 5px;
+        background-color: #ffdede;
       "
     >
       <Bar :data="monthChartData" :options="options" />
@@ -59,11 +19,52 @@
       style="
         padding: 20px;
         height: 700px;
-        border-radius: 40px;
-        background-color: rgba(255, 255, 255, 0.85);
+        border-radius: 5px;
+        background-color: #ffdede;
       "
     >
       <Bar :data="yearChartData" :options="options" />
+    </div>
+    <div class="d-flex btn-group">
+      <button
+        class="mb-5"
+        style="
+          width: 15%;
+          height: 65px;
+          font-size: 1.3vw;
+          position: relative;
+          left: 815px;
+          border-radius: 20px;
+        "
+        :style="{
+          backgroundColor: isMonth === true ? '#3a0000' : 'rgba(0, 0, 0, 0)',
+          borderColor: isMonth === true ? '#3a0000' : '#3a0000',
+          color: isMonth === true ? '#fff' : '#3a0000',
+        }"
+        @click="show('month')"
+      >
+        {{ $t("statistics.month") }}
+      </button>
+      <button
+        class="mb-5"
+        style="
+          position: relative;
+          left: 200px;
+          width: 15%;
+          height: 65px;
+          color: #ffffff;
+          font-size: 1.3vw;
+          border-radius: 20px;
+        "
+        :style="{
+          backgroundColor: isMonth === false ? '#3a0000' : 'rgba(0, 0, 0, 0)',
+          borderColor: isMonth === false ? '#3a0000' : '#3a0000',
+          color: isMonth === false ? '#fff' : '#3a0000',
+        }"
+        @click="show('year')"
+      >
+        {{ $t("statistics.year") }}
+      </button>
     </div>
   </div>
 </template>
@@ -135,24 +136,26 @@ export default {
       this.salesByYear = response.data;
     });
   },
+  mounted() {
+    document.body.style.background =
+      "linear-gradient(to left, #F5B9FF, #B6CFD3)";
+  },
   computed: {
     monthChartData() {
       return {
-        // eslint-disable-next-line no-unused-vars
         labels: Object.keys(this.salesByMonth),
         datasets: [
           {
-            label: "Sales",
+            label: this.$t("statistics.sales"),
             data: this.salesByMonth,
-            borderColor: ["#000000"],
             fill: true,
             backgroundColor: (ctx) => {
               const canvas = ctx.chart.ctx;
               const gradient = canvas.createLinearGradient(0, 0, 0, 160);
 
-              gradient.addColorStop(0, "#000000");
-              gradient.addColorStop(0.5, "#000000");
-              gradient.addColorStop(1, "#c6c6c6");
+              gradient.addColorStop(0, "#e1225d");
+              gradient.addColorStop(0.5, "#e1225d");
+              gradient.addColorStop(1, "#e1225d");
 
               return gradient;
             },
@@ -167,17 +170,16 @@ export default {
         labels: Object.keys(this.salesByYear),
         datasets: [
           {
-            label: "Sales",
+            label: this.$t("statistics.sales"),
             data: this.salesByYear,
-            borderColor: ["#000000"],
             fill: true,
             backgroundColor: (ctx) => {
               const canvas = ctx.chart.ctx;
               const gradient = canvas.createLinearGradient(0, 0, 0, 160);
 
-              gradient.addColorStop(0, "#000000");
-              gradient.addColorStop(0.5, "#000000");
-              gradient.addColorStop(1, "#c6c6c6");
+              gradient.addColorStop(0, "#e1225d");
+              gradient.addColorStop(0.5, "#e1225d");
+              gradient.addColorStop(1, "#e1225d");
               return gradient;
             },
             tension: 0.25,
@@ -195,7 +197,11 @@ export default {
   position: relative;
   top: 50px;
 }
-.chart {
-  height: 500px;
+h1 {
+  color: #3a0000;
+  font-family: "Marmelad", sans-serif;
+}
+.btn-group {
+  margin-top: 50px;
 }
 </style>

@@ -338,6 +338,7 @@ export default {
                 this.resultBouquet = {
                   ...response.data.bouquet,
                   amount: result.value,
+                  total_price: this.getTotalPrice * result.value,
                 };
                 this.setBouquetsBasket(this.resultBouquet);
                 this.$router.push(`/make-order`);

@@ -112,8 +112,8 @@ export default {
             this.$swal({
               icon: "error",
               color: "#000",
-              title: this.$t("something_went_wrong.title"),
-              text: this.$t("something_went_wrong.text"),
+              title: this.$t("payment.error"),
+              text: this.$t("payment.errortext"),
               timer: 4000,
               showClass: {
                 popup: "animate__animated animate__fadeInDown",

@@ -200,12 +200,15 @@
   },
   "payment": {
     "title": "Payment for bouquet",
-    "btn": "Pay"
+    "btn": "Pay",
+    "error" : "Error",
+    "errortext": "Sorry, the order is not possible due to the lack of selected flowers and decorations"
 
   },
   "statistics": {
     "statistics" : "Statistics",
     "month": "Month",
-    "year": "Year"
+    "year": "Year",
+    "sales": "Sales"
   }
 }

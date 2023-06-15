@@ -3,9 +3,9 @@
     <div class="vs-header d-flex justify-content-end">
       <div class="header-actions">
         <button
-          style="background-color: #e1225d"
           title="Delete selected component"
           data-action="delete"
+          id="delete"
           @click="deleteElement"
         >
           {{ $t("bouquet.btndelete") }}
@@ -13,9 +13,17 @@
         <button
           title="Clear all components in the editing area"
           data-action="clear"
+          id="clear"
           @click="clearGrid"
         >
           {{ $t("bouquet.btnclear") }}
+        </button>
+        <button
+          id="sloy"
+          title="Bring selected component to the front"
+          @click="moveElementToFront"
+        >
+          {{ $t("bouquet.btnsloy") }}
         </button>
         <button
           title="Clear all components in the editing area"
@@ -27,7 +35,7 @@
         <button
           title="Clear all components in the editing area"
           data-action="clear"
-          @click="$router.push(`/make-order`)"
+          @click="addToBasket()"
         >
           {{ $t("bouquet.btnmakeorder") }}
         </button>
@@ -142,7 +150,7 @@ import {
   getFlowers,
   updateBouquet,
 } from "@/api/api_request";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "EditBouquet",
   components: {
@@ -176,6 +184,16 @@ export default {
         return accumulator + object.price;
       }, 0);
     },
+    getFlowersIdsFromGrid() {
+      return this.gridElements
+        .filter((element) => element.type === "flower")
+        .map((element) => element.id);
+    },
+    getDecorsIdsFromGrid() {
+      return this.gridElements
+        .filter((element) => element.type === "decor")
+        .map((element) => element.id);
+    },
   },
   beforeMount() {
     getDecors().then((response) => {
@@ -200,12 +218,48 @@ export default {
     });
   },
   methods: {
+    ...mapMutations(["setBouquetsBasket"]),
     show(type) {
       if (type === "decor") {
         this.isDecor = true;
       } else {
         this.isDecor = false;
       }
+    },
+    addToBasket() {
+      updateBouquet(this.$route.params.id, {
+        user_id: this.getUserId,
+        name: this.name,
+        total_price: this.getTotalPrice,
+        configuration: this.gridElements,
+        flowers: this.getFlowersIdsFromGrid,
+        decors: this.getDecorsIdsFromGrid,
+      }).then((response) => {
+        this.$swal({
+          title: this.$t("bouquet.enter_amount"),
+          input: "number",
+          showCancelButton: true,
+          confirmButtonText: this.$t("bouquet.submit"),
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.resultBouquet = {
+              ...response.data.bouquet,
+              amount: result.value,
+              total_price: this.getTotalPrice * result.value,
+            };
+            this.setBouquetsBasket(this.resultBouquet);
+            this.$router.push(`/make-order`);
+          }
+        });
+      });
+    },
+    moveElementToFront(index) {
+      if (index === this.gridElements.length - 1) {
+        // Элемент уже на переднем плане
+        return;
+      }
+      const element = this.gridElements.splice(index, 1)[0];
+      this.gridElements.push(element);
     },
     addNewElementToGrid(imageId, elementId, type, price) {
       const index =
@@ -367,7 +421,7 @@ export default {
   }
   button {
     padding: 5px 12px;
-    font-size: 1.3vw;
+    font-size: 1.1vw;
     color: #fff;
     background: #e1225d;
     border: 1px solid #d5d5d5;
@@ -380,5 +434,12 @@ export default {
       background-image: linear-gradient(to bottom, #eee 0, #ddd 100%);
     }
   }
+}
+#delete,
+#sloy,
+#clear {
+  border: #000 solid 1px;
+  background-color: transparent;
+  color: #000;
 }
 </style>
