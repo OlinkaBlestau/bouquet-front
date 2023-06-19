@@ -10,6 +10,7 @@
         <th scope="col">{{ $t("tables.phone") }}</th>
         <th scope="col">{{ $t("tables.amount") }}</th>
         <th scope="col">{{ $t("tables.view") }}</th>
+        <th scope="col">{{ $t("tables.status") }}</th>
       </tr>
     </thead>
     <tbody style="background-color: #ffffff">
@@ -37,6 +38,7 @@
             />
           </button>
         </td>
+        <th scope="col"><input type="checkbox" /></th>
       </tr>
     </tbody>
   </table>

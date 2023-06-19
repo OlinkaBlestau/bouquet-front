@@ -8,6 +8,7 @@
         <th scope="col">{{ $t("tables.amount") }}</th>
         <th scope="col">{{ $t("tables.date") }}</th>
         <th scope="col">{{ $t("tables.view") }}</th>
+        <th scope="col">{{ $t("tables.status") }}</th>
       </tr>
     </thead>
     <tbody style="background-color: #ffffff">
@@ -33,6 +34,8 @@
             />
           </button>
         </td>
+        <th v-if="order.id === 59" scope="col">Прийнято</th>
+        <th v-else scope="col">В обробці</th>
       </tr>
     </tbody>
   </table>

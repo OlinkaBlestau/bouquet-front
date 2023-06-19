@@ -20,6 +20,14 @@
               <p>{{ bouquet.color }}</p>
               <!--              <p>1 {{ $t("orders.units") }}</p>-->
               <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
+              <input
+                type="number"
+                name="amount"
+                placeholder="amount"
+                style="width: 121px"
+                min="1"
+                oninput="if(this.value < 1) this.value = 1;"
+              />
             </div>
             <hr />
             <div
@@ -31,6 +39,14 @@
               <p>{{ bouquet.color }}</p>
               <!--              <p>1 {{ $t("orders.units") }}</p>-->
               <p>{{ bouquet.price }} {{ $t("orders.uahunit") }}</p>
+              <input
+                type="number"
+                name="amount"
+                placeholder="amount"
+                style="width: 121px"
+                min="1"
+                oninput="if(this.value < 1) this.value = 1;"
+              />
             </div>
           </div>
         </div>
@@ -151,7 +167,7 @@ h1 {
 }
 .bouquet-info-item {
   position: relative;
-  width: 166%;
+  width: 159%;
   font-size: 1.2vw;
   background-color: #ffdede;
   padding: 25px;

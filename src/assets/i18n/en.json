@@ -121,7 +121,8 @@
     "name_b": "Name of bouquet",
     "amount": "Amount",
 
-    "no_order": "There are no orders"
+    "no_order": "There are no orders",
+    "status": "Status"
   },
   "bouquet": {
     "viewbouquet": "View bouquets",
